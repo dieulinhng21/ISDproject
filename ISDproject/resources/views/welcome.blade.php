@@ -1,5 +1,14 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +21,8 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
+                /* background-color: #fff; */
+                background-image: linear-gradient(#32a2a8, #fff);
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
@@ -64,37 +74,40 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <div class="flex-center position-ref full-height" >
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('login') }}">Đăng nhập</a>
 
-                        @if (Route::has('register'))
+                        <!-- @if (Route::has('register'))
                             <a href="{{ route('register') }}">Register</a>
-                        @endif
+                        @endif -->
                     @endauth
                 </div>
             @endif
-
+        
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                <!-- <span class="logo-mini"><b>AZ</b>Land</span> -->
+                <img src="{{asset('layouts/dist/img/banner.webp')}}" alt="Công ty bất động sản AZ">
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
+                <!-- <div class="links"><a href="#">Công ty CP Bất động sản AZ (AZ Land)</a></div> -->
+                <div class="links"><a href="">Tòa nhà AZ Building, 58 Trần Thái Tông , Dịch Vọng , Cầu Giấy , Hà Nội</a></div>
+                <div class="links"><a href="">ĐT: (04) 3 5379 373</a></div>
+                <div class="links"><a href="">Fax: (04) 3 5379 372</a></div>
+                <div class="links"><a href="">E-mail: info@azland.vn</a></div>
+                    <!-- <a href="https://laravel.com/docs">Docs</a>
+                    
+                    <a href="">Website: http://www.azland.com.vn</a>
                     <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                    <a href="https://github.com/laravel/laravel">GitHub</a> -->
+                
             </div>
         </div>
     </body>
 </html>
+<!-- @include('partialView.footer') -->
