@@ -58,29 +58,30 @@ button {
             
             <label for="apartment">Tòa chung cư</label>
             <!-- take array from create function in FlatController -->
-            <select name="apartment" value="{{ old('apartment') }}" required>
+            <select name="apartment" value="{{ old('apartment') }}">
                 @foreach($available_apartment_list as $apartment)
                     <option value="{{$apartment->idtoachungcu}}">{{$apartment->tentoa}}</option>
                 @endforeach
             </select>
 
             <label>Tên căn hộ</label>
-            <input type="text" name="flat" value="{{ old('flat') }}" required><br><br>
+            <input type="text" name="flat" value="{{ old('flat') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
 
             <label>Giá trị</label>
-            <input type="number" name="price" value="{{ old('price') }}" required><br><br>
+            <input type="number" name="price" value="{{ old('price') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
 
             <label>Chi tiết: </label><br>
             <div style="text-align:left; padding-left:40px;">
-                Diện tích: <input class="detail" type="number" name="square" value="{{ old('square') }}" required> 
+                Diện tích: 
+                <input class="detail" type="number" name="square" value="{{ old('square') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"> 
                 mét vuông <br><br>
                 Phòng bao gồm :
                 <!-- <input class="detail" type="number" name="livingroom" value="{{ old('livingroom') }}" required> phòng khách - 
                 <input class="detail" type="number" name="bedroom" value="{{ old('kitchen') }}" required> phòng bếp - 
                  -  -->
                  1 phòng khách - 1 phòng bếp - 
-                <input class="detail" type="number" name="bedroom" value="{{ old('bedroom') }}" required> phòng ngủ - 
-                <input class="detail" type="number" name="bathroom" value="{{ old('bathroom') }}" required> phòng vệ sinh
+                <input class="detail" type="number" name="bedroom" value="{{ old('bedroom') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"> phòng ngủ - 
+                <input class="detail" type="number" name="bathroom" value="{{ old('bathroom') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"> phòng vệ sinh
             </div><br><br>
 
             <label for="status">Tình trạng:</label>

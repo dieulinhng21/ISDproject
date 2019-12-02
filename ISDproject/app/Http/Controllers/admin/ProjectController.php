@@ -43,7 +43,7 @@ class ProjectController extends Controller
             'company' => 'required|regex:/^([a-zA-Z\s\-]*)$/',
             'location' => 'required',
             'price' => 'required|numeric|min:0',
-            'apartment_number' => 'required|numeric| min:0'
+            'apartment_number' => 'required|numeric| min:1'
             // 'status' => 'required'
         ],
         [
@@ -56,13 +56,13 @@ class ProjectController extends Controller
             //
             'location.required' => 'Vị trí còn trống',
             //
-            'price.required' => 'Giá trị còn trống',
-            'price.numeric' => 'Giá trị phải là số',
-            'price.min' => 'Giá trị phải là số dương',
+            'price.required' => 'Trị giá còn trống',
+            'price.numeric' => 'Trị giá phải là số',
+            'price.min' => 'Trị giá phải là số dương',
             //
-            'apartment_number.required' => 'Số căn hộ còn trống',
-            'apartment_number.numeric' => 'Số căn hộ phải là số',
-            'apartment_number.min' => 'Số căn hộ phải lớn hơn 0',
+            'apartment_number.required' => 'Số tòa nhà còn trống',
+            'apartment_number.numeric' => 'Số tòa nhà phải là số',
+            'apartment_number.min' => 'Số tòa nhà phải lớn hơn 1',
             // 'status.required' => 'Tình trạng còn trống'
             // 'date_format:Y-m-d' => 'Ngày tháng theo định dạng năm-tháng-ngày',
         ]);
@@ -117,8 +117,8 @@ class ProjectController extends Controller
             'project_name' => 'required|regex:/^([a-zA-Z\s\-]*)$/',
             'company' => 'required',
             'location' => 'required',
-            'project_worth' => 'required|numeric|min:0',
-            'apartment_number' => 'required|integer|min:0',
+            'price' => 'required|numeric|min:1',
+            'apartment_number' => 'required|integer|min:1',
             
         ],
         [
@@ -129,13 +129,13 @@ class ProjectController extends Controller
             //
             'location.required' => 'Vị trí còn trống',
             //
-            'price.required' => 'Giá trị dự án còn trống',
-            'price.numeric' => 'Giá trị dự án phải là số',
-            'price.min' => 'Giá trị dự án phải lớn hơn 0',
+            'price.required' => 'Trị giá dự án còn trống',
+            'price.numeric' => 'Trị giá dự án phải là số',
+            'price.min' => 'Trị giá dự án phải lớn hơn 1',
             //
             'apartment_number.required' => 'Số tòa nhà còn trống',
             'apartment_number.integer' => 'Số tòa nhà phải là số',
-            'apartment_number.min' => 'Số tòa nhà phải lớn hơn 0',
+            'apartment_number.min' => 'Trị giá phải là số dương',
             //
             
         ]);          
@@ -163,7 +163,7 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         $project->delete();
-        session()->flash('delete_notif','Đã xóa căn hộ');
+        session()->flash('delete_notif','Đã xóa dự án');
         return redirect('/admin/project');
     }
 }

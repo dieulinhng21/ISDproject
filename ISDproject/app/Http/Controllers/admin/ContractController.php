@@ -136,7 +136,7 @@ class ContractController extends Controller
             $flat_status = DB::table('canho')->where('idcanho', $flat_id)->value('tinhtrang');
             var_dump($flat_status);
             //nếu căn hộ chưa có ng mua
-            if($flat_status === 0){
+            if($flat_status == 0){
                 $customer = Customer::create();
 
                 $customer->idcanho = $flat_id;
@@ -175,7 +175,8 @@ class ContractController extends Controller
                 return redirect('/admin/contract');
                 
         }else{
-            session()->flash('invalid_notif','Căn hộ đã có người mua');
+            // session()->flash('invalid_notif','Căn hộ đã có người mua');
+            return redirect('/admin/contract/create')->withErrors("Căn hộ đã có người mua")->withInput();
         }
     }
 

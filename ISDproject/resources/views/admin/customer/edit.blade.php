@@ -66,7 +66,7 @@ input.custom_address{
                     <input name="dob" type="text" id="dob" value="{{$customer->ngaysinh}}" required><i>(tháng/ngày/năm)</i><br><br> -->
                 
                     <label for="email">Email</label>
-                    <input name="email" type="email" class="custom" id="email" value="{{$customer->email}}" required>
+                    <input name="email" type="email" class="custom" id="email" value="{{$customer->email}}" required oninvalid="this.setCustomValidity('Định dạng email sai')">
                 
                     <label for="phone_number">SĐT</label>
                     <input name="phone_number" type="number" id="phone_number" value="{{$customer->sodienthoai}}" required><br><br>

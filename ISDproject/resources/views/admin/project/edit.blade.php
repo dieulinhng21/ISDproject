@@ -64,7 +64,7 @@ button {
                 <input name="apartment_number" type="number" value="{{$project->sotoanha}}" required>
             
                 <label>Trị giá</label>
-                <input name="project_worth" type="number" value="{{$project->trigia}}" required><br><br>
+                <input name="price" type="number" value="{{$project->trigia}}" required><br><br>
             
                 <!-- <label>Tình trạng</label>
                 @if($project->tinhtrang == 1)

@@ -52,7 +52,7 @@ input.custom_address{
             </div>
         @endif
         <label>Họ tên</label>
-        <input type="text" name="name" value="{{ old('name') }}" required autofocus>
+        <input type="text" name="name" value="{{ old('name') }}" required autofocus oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
         <i>(Họ tên viết không dấu)</i>
 
         <label>Vai trò</label>
@@ -63,17 +63,17 @@ input.custom_address{
 
 
         <label>Ngày sinh</label>
-        <input type="date" name="dob" value="{{ old('dob') }}" required>
+        <input type="date" name="dob" value="{{ old('dob') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
 
 
         <label>SĐT</label>
-        <input type="number" name="phone_number" value="{{ old('phone_number') }}" required><br><br>
+        <input type="number" name="phone_number" value="{{ old('phone_number') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
 
         <label>Email</label>
-        <input type="email" name="email" class="custom" value="{{ old('email') }}" required><br><br>
+        <input type="email" name="email" class="custom" value="{{ old('email') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninvalid="this.setCustomValidity('Định dạng email sai')"><br><br>
 
         <label>Địa chỉ</label>
-        <input class="custom_address" type="text" name="address" value="{{ old('address') }}"required><br><br>
+        <input class="custom_address" type="text" name="address" value="{{ old('address') }}"required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
         
         <button type="submit" class="btn btn-primary">Lưu</button>
         <button type="reset" class="btn btn-primary">Làm mới trang</button>

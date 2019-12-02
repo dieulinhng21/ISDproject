@@ -104,9 +104,9 @@ input{
 	</div>
 		<h3>GIÁ BÁN VÀ PHƯƠNG THỨC THANH TOÁN</h3>
 		<p>
-		Giá bán nhà ở đối với căn hộ nhà ở chung cư được tính theo công thức lấy đơn giá 01 m2 sử dụng nhà ở (x) với tổng diện tích sử dụng nhà ở mua bán,<br><br>
-		 cụ thể là:<input type="number" name="square" value="{{ $flat->dientich }}" required>m2 sử dụng (x)<input type="number" >đồng/1m2 sử dụng = <input type="number" name="price" value="{{$flat->giatri}}" required>đồng. 
-		 (Bằng chữ:<input type="text" style="width: 350px">).<br><br>
+		Giá bán nhà ở đối với căn hộ nhà ở chung cư được tính theo công thức lấy đơn giá 01 mét vuông sử dụng nhà ở (x) với tổng diện tích sử dụng nhà ở mua bán,<br><br>
+		 cụ thể là:<input type="number" name="square" value="{{ $flat->dientich }}" required>mét vuông sử dụng (x)<input type="number" >đồng/1 mét vuông sử dụng = <input type="number" name="price" value="{{$flat->giatri}}" required>đồng. 
+		 <!-- (Bằng chữ:<input type="text" style="width: 350px">). --><br><br>
 		 Giá bán này đã bao gồm thuế giá trị gia tăng VAT (nếu bên bán thuộc diện phải nộp thuế VAT).<br><br>
 		 Phương thức thanh toán: Các khoản thanh toán theo Hợp Đồng này chỉ được thực hiện qua tài khoản của Bên Bán mở tại Ngân hàng TMCP Đầu tư và Phát triển Việt Nam – Chi nhánh Tây Hà Nội (BIDV Tây Hà Nội)<br><br>
 		 a. Thanh toán một lần vào ngày

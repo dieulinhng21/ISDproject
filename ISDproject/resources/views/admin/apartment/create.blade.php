@@ -65,23 +65,28 @@ button {
 
             <label>Tòa chung cư</label>
             <input class="custom" type="text" name="apartment_name" value="{{ old('apartment_name') }}" 
-            required><br><br>
+            required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
 
             <label>Tầng thương mại</label>
-            Từ tầng <input class="detail" type="number" name="begin_trade_floor" 
-            value="{{ old('begin_trade_floor') }}" required> 
-            đến <input class="detail" type="number" name="end_trade_floor"
-            value="{{ old('end_trade_floor') }}" required>
+            Từ tầng 
+            <input class="detail" type="number" name="begin_trade_floor" 
+            value="{{ old('begin_trade_floor') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"> 
+            đến 
+            <input class="detail" type="number" name="end_trade_floor"
+            value="{{ old('end_trade_floor') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
 
             <label>Tầng dân cư</label>
-            Từ tầng <input class="detail" type="number" name="begin_people_floor"
-            value="{{ old('begin_people_floor') }}" required>
-            đến <input class="detail" type="number" name="end_people_floor"
-            value="{{ old('end_people_floor') }}" required><br><br>
+            Từ tầng 
+            <input class="detail" type="number" name="begin_people_floor"
+            value="{{ old('begin_people_ floor') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
+            đến 
+            <input class="detail" type="number" name="end_people_floor"
+            value="{{ old('end_people_floor') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
 
             <label for="status">Đơn vị quản lý</label>
             <input  type="text" name="manage_team" value="{{ old('apartment_name') }}" 
-            required><i>(Tên đơn vị quản lý viết không dấu)</i><br><br>
+            required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
+            <i>(Tên đơn vị quản lý viết không dấu)</i><br><br>
 
             <button type="submit" class="btn btn-primary">Lưu</button>
             <button type="reset" class="btn btn-primary">Làm mới trang</button>

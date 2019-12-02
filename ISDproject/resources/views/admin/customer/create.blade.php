@@ -52,11 +52,11 @@ margin-left: 50%;
         </div>
     @endif
         <label>Họ tên</label>
-        <input type="text" name="name" value="{{ old('name') }}" autofocus required>
+        <input type="text" name="name" value="{{ old('name') }}" autofocus required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
         <i>(Họ tên viết không dấu)</i><br><br>
 
         <label>CMND</label>
-        <input type="number" name="identity_card" value="{{ old('identity_card') }}" required>
+        <input type="number" name="identity_card" value="{{ old('identity_card') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
 
         <label>Căn hộ</label>
         <select name="flat">
@@ -74,16 +74,16 @@ margin-left: 50%;
         
 
         <label>Email</label>
-        <input class="custom" type="email" name="email" value="{{ old('email') }}" required>
+        <input class="custom" type="email" name="email" value="{{ old('email') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninvalid="this.setCustomValidity('Định dạng email sai')">
 
         <label>SĐT</label>
-        <input type="number" name="phone_number" value="{{ old('phone_number') }}" required><br><br>
+        <input type="number" name="phone_number" value="{{ old('phone_number') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
 
         <label>Hộ khẩu</label>
-        <input class="custom_address" type="text" name="inhabitant_number" value="{{ old('inhabitant_number') }}" required><br><br>
+        <input class="custom_address" type="text" name="inhabitant_number" value="{{ old('inhabitant_number') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
 
         <label>Địa chỉ</label>
-        <input class="custom_address" type="text" name="address" value="{{ old('address') }}" required><br><br>
+        <input class="custom_address" type="text" name="address" value="{{ old('address') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
 
         <label for="note">Ghi chú :</label><br>
         <textarea rows="4" cols="50" name="note" id="note" value="{{ old('note') }}" ></textarea><br><br>

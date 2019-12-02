@@ -68,7 +68,7 @@ button {
                 <input name="phone_number" type="number" value="{{$manager->sodienthoai}}" required><br><br>
                        
                 <label>Email</label>
-                <input name="email" type="email" class="custom" value="{{$manager->email}}" required><br><br>
+                <input name="email" type="email" class="custom" value="{{$manager->email}}" required oninvalid="this.setCustomValidity('Định dạng email sai')"><br><br>
                        
                 <label>Địa chỉ</label>
                 <input name="address" type="text" class="custom_address" value="{{$manager->diachi}}" required><br><br>

@@ -47,21 +47,22 @@ input,select,textarea{
 
             <label for="project_name">Tên dự án </label>
             <input type="text" id="project_name" name="project_name" value="{{ old('project_name') }}" 
-            required autofocus>
+            required autofocus oninvalid="this.setCustomValidity('Chưa nhập thông tin')" 
+            oninput="setCustomValidity('')">
             <i>(Tên dự án viết không dấu)</i><br><br>
 
             <label>Công ty trực thuộc</label>
-            <input type="text" name="company" value="{{ old('company') }}" required>    
+            <input type="text" name="company" value="{{ old('company') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">    
             <i>(Tên công ty viết không dấu)</i><br><br>   
 
             <label>Vị trí </label>&nbsp;&nbsp;
-            <input type="text" name="location" value="{{ old('location') }}" required><br><br>
+            <input type="text" name="location" value="{{ old('location') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
 
             <label>Số tòa nhà</label>
-            <input type="number" name="apartment_number" value="{{ old('apartment_number') }}" required>
+            <input type="number" name="apartment_number" value="{{ old('apartment_number') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
 
             <label>Trị giá</label>
-            <input type="number" name="price" value="{{ old('price') }}" required><br><br>  
+            <input type="number" name="price" value="{{ old('price') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>  
 
             
 
