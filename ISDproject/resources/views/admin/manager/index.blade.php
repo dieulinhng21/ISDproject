@@ -46,6 +46,7 @@
                         <thead>
                             <tr>
                                 <th>Họ và tên</th>
+                                <th>Ngày sinh</th>
                                 <th>Vai trò</th>
                                 <th>SĐT</th>
                                 <th>Email</th>
@@ -57,6 +58,7 @@
                             @foreach($model as $item )
                             <tr>
                                 <td>{{$item->hoten}}</td>
+                                <td>{{$item->ngaysinh}}</td>
                                 <td>{{$item->vaitro}}</td>
                                 <td>{{$item->sodienthoai}}</td>
                                 <td>{{$item->email}}</td>

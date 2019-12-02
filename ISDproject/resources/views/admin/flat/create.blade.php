@@ -79,7 +79,7 @@ button {
                 <input class="detail" type="number" name="bedroom" value="{{ old('kitchen') }}" required> phòng bếp - 
                  -  -->
                  1 phòng khách - 1 phòng bếp - 
-                <input class="detail" type="number" name="kitchen" value="{{ old('bedroom') }}" required> phòng ngủ - 
+                <input class="detail" type="number" name="bedroom" value="{{ old('bedroom') }}" required> phòng ngủ - 
                 <input class="detail" type="number" name="bathroom" value="{{ old('bathroom') }}" required> phòng vệ sinh
             </div><br><br>
 

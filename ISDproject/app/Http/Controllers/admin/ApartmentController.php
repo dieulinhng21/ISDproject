@@ -90,7 +90,7 @@ class ApartmentController extends Controller
             $apartment->donviquanly = $request->get('manage_team');
 
             $apartment->save();
-            session()->flash('create_notif','Tạo tòa chung cư thành công!');
+            session()->flash('create_notif','Thêm tòa chung cư thành công!');
             return redirect('/admin/apartment');
     }
 

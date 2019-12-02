@@ -75,10 +75,12 @@ input{
 <div class="contract_content">
 	<strong>CĂN HỘ: </strong><input type="text" name="tencanho" value="{{ old('tencanho') }}" required><br><br>
 	<strong>CĂN HỘ TRỰC THUỘC DỰ ÁN:</strong>
-	<select name="project_name" id="project_name" required>Dự án: 
+	<select name="project_name" id="project_name">Dự án: 
+	@if(isset($projects))
 		@foreach($projects as $project)
 			<option value="{{$project->idduan}}">{{$project->tenduan}}</option>
 		@endforeach
+	@endif
     </select><br><br>
 	<strong>SÀN GIAO DỊCH:</strong><input type="text" name="san" value="{{ old('san') }}" required>
 	
@@ -95,7 +97,7 @@ input{
 
 	<h3>BÊN MUA NHÀ Ở (sau đây gọi tắt là Bên mua):</h3>
 	<div class="content">
-	- Ông (bà):<input type="text" name="name" value="{{ old('name') }}" required><br><br>
+	- Ông (bà):<input type="text" name="name" value="{{ old('name') }}" required><i>(Họ tên điền không dấu)</i><br><br>
 	- Số CMND:<input type="number" name="identity_card" value="{{ old('identity_card') }}" required>
 	  Ngày cấp: <input type="date" name="identity_date" value="{{ old('identity_date') }}" required>
 		  <!-- /<input type="number" name="identity_month" style="width:45px; text-align:center">
@@ -111,7 +113,7 @@ input{
 		<p>
 		Giá bán nhà ở đối với căn hộ nhà ở chung cư được tính theo công thức lấy đơn giá 01 m2 sử dụng nhà ở (x) với tổng diện tích sử dụng nhà ở mua bán,<br><br>
 		 cụ thể là:<input type="number" name="square" value="{{ old('square') }}" required>m2 sử dụng (x)<input type="number" name="price_per_square" value="{{ old('price_per_square') }}" required>đồng/1m2 sử dụng <br><br> = <input type="number" name="price" value="{{ old('price') }}" required>đồng. 
-		 (Bằng chữ:<input type="text" name="price_to_string" style="width: 350px" value="{{ old('price_to_string') }}" required>).<br><br>
+		 (Bằng chữ:<input type="text" name="price_to_string" style="width: 350px" value="{{ old('price_to_string') }}">).<br><br>
 		 Giá bán này đã bao gồm thuế giá trị gia tăng VAT (nếu bên bán thuộc diện phải nộp thuế VAT).<br><br>
 		 Phương thức thanh toán: Các khoản thanh toán theo Hợp Đồng này chỉ được thực hiện qua tài khoản của Bên Bán mở tại Ngân hàng TMCP Đầu tư và Phát triển Việt Nam – Chi nhánh Tây Hà Nội (BIDV Tây Hà Nội)<br><br>
 		 a. Thanh toán một lần vào 

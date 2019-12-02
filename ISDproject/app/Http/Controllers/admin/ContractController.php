@@ -4,8 +4,11 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\admin\Controller;
 use App\Models\Contract;
+use App\Models\Project;
 use App\Models\Customer;
+use App\Models\Flat;
 use App\Http\Requests;
+use Illuminate\Validation\Rule;
 
 use Illuminate\Http\Request;
 
@@ -49,21 +52,22 @@ class ContractController extends Controller
         $validator = $request->validate([
             //|regex:/^[a-zA-Z]+$
             'project_name' => 'required',
-            'tencanho' => [
-                'required',
-                //tìm căn hộ trong bảng canho đồng thời validate tình trạng là còn trống hay đã đc bán
-                Rule::exists('canho')->where(function ($query) {
-                    $query->where('tinhtrang', 0);
-                }),
-            ],
+            'tencanho' => 'required|exists:canho,tencanho',
+            // [
+            //     'required',
+            //     //tìm căn hộ trong bảng canho đồng thời validate tình trạng là còn trống hay đã đc bán
+            //     Rule::exists('canho')->where(function ($query) {
+            //         $query->where('tinhtrang', 0);
+            //     }),
+            // ],
             'san' => 'required',
             'contract_code' => 'required|regex:/^([a-zA-Z0-9\s\-]*)$/',
-            'contract_worth' => 'required|numeric',
+            'price' => 'required|numeric',
             'contract_date' => 'required|before_or_equal:today',
             'pay_date' => 'after_or_equal:today',
-            'extra_date' => 'integer| min:0',
-            //validate customer infor before insert to db
-            'name' => 'required|max:50',
+            'extra_date' => 'min:0',
+            //validate customer infor before insert to db 
+            'name' => 'required|regex:/^([a-zA-Z0-9\s\-]*)$/|max:50',
             'noicap' => 'required|max:50',
             'identity_card' => 'required|numeric|digits_between:9,10|unique:khachhang,chungminhthu',
             'identity_date' => 'required|before_or_equal:today',
@@ -83,18 +87,19 @@ class ContractController extends Controller
             'contract_code.required' => 'Số hợp đồng còn trống',
             'contract_code.regex' => 'Số hợp đồng chứa ký tự không hợp lệ',
             //
-            'contract_worth.required' => 'Giá trị hợp đồng còn trống',
-            'contract_worth.numeric' => 'Giá trị hợp đồng phải là số',
+            'price.required' => 'Giá trị hợp đồng còn trống',
+            'price.numeric' => 'Giá trị hợp đồng phải là số',
             //
             'contract_date.required' => 'Ngày tạo hợp đồng còn trống',
             'contract_date.before_or_equal' => 'Ngày tạo hợp đồng không vượt quá hiện tại',
             //
             'pay_date.after_or_equal' => 'Ngày thanh toán hợp đồng không được ở trong quá khứ ',
             //
-            'extra_date.integer' => 'Ngày gia hạn phải là số',
+            // 'extra_date.integer' => 'Ngày gia hạn phải là số',
             'extra_date.min' => 'Ngày gia hạn phải là số dương',
             //
             'name.required' => 'Tên khách hàng còn trống',
+            'name.regex' => 'Tên khách hàng chứa ký tự không hợp lệ',
             'name.max' => 'Tên khách hàng vượt quá số ký tự cho phép',
             //
             'noicap.required' => 'nơi cấp còn trống',
@@ -116,50 +121,62 @@ class ContractController extends Controller
             //
             'address.required' => 'Địa chỉ còn trống'
         ]); 
-            //tạo customer trước
+        //nếu hợp đồng là 1 đóng 1 lần thì cần có hạn đóng tiền
+        // $date = $request->get('contract_date');
+        // $kind = $request->get('contract_kind');
+        // if(strtotime($date)!='0000-00-00' && $kind == 1){
+        //     $error_mess = "Hợp đồng với tiến độ là 1 cần có ngày ký hợp đồng!";
+        //     session()->flash('invalid_notif',$error_mess);
+        //     return redirect('admin/contract/create')->withInput();;
+        // }else{
+            //tạo customer
+            
             $flat_name = $request->get('tencanho');
             $flat_id = DB::table('canho')->where('tencanho', $flat_name)->value('idcanho');
-            $customer = Customer::create();
+            $flat_status = DB::table('canho')->where('idcanho', $flat_id)->value('tinhtrang');
+            var_dump($flat_status);
+            //nếu căn hộ chưa có ng mua
+            if($flat_status === 0){
+                $customer = Customer::create();
 
-            $customer->idcanho = $flat_id;
-            $customer->hoten = $request->get('name');
-            $customer->chungminhthu = $request->get('identity_card');
-            $customer->ngaycap = $request->get('identity_date');
-            $customer->noicap = $request->get('noicap');
-            $customer->sodienthoai = $request->get('phone_number');
-            $customer->hokhau = $request->get('inhabitant_number');
-            $customer->diachi = $request->get('address');
-            $customer->save();
+                $customer->idcanho = $flat_id;
+                $customer->hoten = $request->get('name');
+                $customer->chungminhthu = $request->get('identity_card');
+                $customer->ngaycap = $request->get('identity_date');
+                $customer->noicap = $request->get('noicap');
+                $customer->sodienthoai = $request->get('phone_number');
+                $customer->hokhau = $request->get('inhabitant_number');
+                $customer->diachi = $request->get('address');
+                $customer->save();
 
-            //tìm id khách hàng theo số cmnd để lấy id
-            $customer_infor = $request->get('identity_card');
-            $customer_id = DB::table('khachhang')->where('chungminhthu', $customer_infor)->value('idkhachhang');
-            $contract = Contract::create();
-            
-            //nếu hợp đồng là 1 đóng 1 lần thì cần có hạn đóng tiền
-            $date = $request->get('contract_date');
-            $kind = $request->get('contract_kind');
-            if(strtotime($date)!='0000-00-00' && $kind == 1){
-                $error_mess = "Hợp đồng với tiến độ là 1 cần có ngày ký hợp đồng!";
-                session()->flash('invalid_notif',$error_mess);
-                return view('admin.contract.create');
-            }else{
+                //tìm id khách hàng theo số cmnd để lấy id
+                $customer_infor = $request->get('identity_card');
+                $customer_id = DB::table('khachhang')->where('chungminhthu', $customer_infor)->value('idkhachhang');
+
+                $contract = Contract::create();
+
                 $contract->mahopdong= $request->get('contract_code');
                 $contract->idduan= $request->get('project_name');
                 $contract->idcanho= $flat_id;
                 $contract->idkhachhang= $customer_id;
                 $contract->san= $request->get('san');
-                $contract->giatri = $request->get('contract_worth');
-                $contract->ngayky = $date;
+                $contract->giatri = $request->get('price');
+                $contract->ngayky = $request->get('contract_date');;
                 $contract->tiendo = $request->get('contract_kind');
-                $contract->pay_date = $request->get('ngaythanhtoan');
-                $contract->extra_date = $request->get('han');
-
+                $contract->ngaythanhtoan = $request->get('pay_date');
+                $contract->han = $request->get('extra_date');
                 $contract->save();
                 
+                //tìm căn hộ và cập nhật tình trạng "đã có ng mua"
+                $flat = Flat::find($flat_id);
+                $flat->tinhtrang = 1;
+                $flat->save();
                 session()->flash('create_notif','Thêm hợp đồng thành công!');
                 return redirect('/admin/contract');
-            }
+                
+        }else{
+            session()->flash('invalid_notif','Căn hộ đã có người mua');
+        }
     }
 
     /**
@@ -210,7 +227,8 @@ class ContractController extends Controller
             'san' => 'required',
             'contract_code' => 'required|regex:/^([a-zA-Z0-9\s\-]*)$/',
             'contract_date' => 'required|before_or_equal:today',
-            'extra_date' => 'integer|min:0',
+            'pay_date' => 'required|after_or_equal:today',
+            'extra_date' => 'min:0',
             //validate customer infor before insert to db
             'name' => 'required|max:50',
             'noicap' => 'required|max:50',
@@ -234,7 +252,9 @@ class ContractController extends Controller
             'contract_date.required' => 'Ngày tạo hợp đồng còn trống',
             'contract_date.before_or_equal' => 'Ngày tạo hợp đồng không vượt quá hiện tại',
             //
-            'extra_date.integer' => 'Ngày gia hạn phải là số',
+            'pay_date.required' => 'Ngày thanh toán hợp đồng còn trống',
+            'pay_date.after_or_equal' => 'Ngày thanh toán không được ở trong quá khứ',
+            // 'extra_date.integer' => 'Ngày gia hạn phải là số',
             'extra_date.min' => 'Ngày gia hạn phải là số dương',
 
             //customer information start
@@ -258,9 +278,12 @@ class ContractController extends Controller
             //
             'address.required' => 'Địa chỉ không được trống'
         ]); 
+            $customer_identity_card = $request->get('identity_card');
             $flat_name = $request->get('tencanho');
             $flat_id = DB::table('canho')->where('tencanho', $flat_name)->value('idcanho');
-            $customer = Customer::create();
+            $customer_id = DB::table('khachhang')->where('chungminhthu', $customer_identity_card)
+            ->value('idkhachhang');
+            $customer = Customer::find($customer_id);
 
             $customer->idcanho = $flat_id;
             $customer->hoten = $request->get('name');
@@ -275,14 +298,14 @@ class ContractController extends Controller
             //tìm id khách hàng theo số cmnd để lấy id
             $customer_infor = $request->get('identity_card');
             $customer_id = DB::table('khachhang')->where('chungminhthu', $customer_infor)->value('idkhachhang');
-            $contract = Contract::create();
+            $contract = Contract::find($id);
             
             $contract->mahopdong= $request->get('contract_code');
             $contract->idduan= $request->get('project_name');
             $contract->idcanho= $flat_id;
             $contract->idkhachhang= $customer_id;
             $contract->san= $request->get('san');
-            $contract->giatri = $request->get('contract_worth');
+            $contract->giatri = $request->get('price');
             $contract->ngayky = $request->get('contract_date');
             $contract->ngaythanhtoan = $request->get('pay_date');
             $contract->han = $request->get('extra_date');

@@ -116,7 +116,7 @@ class FlatController extends Controller
 
 
             $flat->save();
-            session()->flash('create_notif','Tạo căn hộ thành công!');
+            session()->flash('create_notif','Thêm căn hộ thành công!');
             return redirect('/admin/flat'); 
     }
 

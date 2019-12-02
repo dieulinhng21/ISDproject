@@ -69,10 +69,12 @@ class ManagerController extends Controller
         ]);
             $manager = Manager::create();
             $manager->hoten= $request->get('name');
+            $manager->ngaysinh = $request->get('dob');
             $manager->vaitro= $request->get('role');
             $manager->sodienthoai = $request->get('phone_number');//sđt dài từ 9-10 số
             $manager->email = $request->get('email');
             $manager->diachi = $request->get('address');
+           
 
             $manager->save();
             
@@ -116,7 +118,7 @@ class ManagerController extends Controller
             'name' => 'required|regex:/^([a-zA-Z\s\-]*)$/|max:50',
             'dob' => 'required|before_or_equal:today',
             'phone_number' => 'required|numeric|digits_between:9,10',//sđt dài từ 9-10 số
-            'email' => 'required|email|unique:nguoiquanly,email',
+            'email' => 'required|email',
             'address' => 'required'
         ],
         [
@@ -132,7 +134,7 @@ class ManagerController extends Controller
             'phone_number.digits_between' => 'Độ dài số điện thoại không hợp lệ',
             //
             'email.required' => 'Email còn trống',
-            'email.unique' => 'Email đã tồn tại',
+            // 'email.unique' => 'Email đã tồn tại',
             'email' => 'Email không hợp lệ',
             //
             'address.required' => 'Địa chỉ còn trống',
@@ -140,6 +142,7 @@ class ManagerController extends Controller
             $manager = Manager::find($id);
 
             $manager->hoten= $request->get('name');
+            $manager->ngaysinh = $request->get('dob');
             $manager->vaitro= $request->get('role');
             $manager->sodienthoai = $request->get('phone_number');
             $manager->email = $request->get('email');

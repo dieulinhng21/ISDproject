@@ -44,7 +44,7 @@
     @elseif(session()->has('update_notif'))
         <div class="alert alert-success">{{ session()->get('update_notif') }}</div>
     @elseif(session()->has('delete_notif'))
-    <div class="alert alert-success">{{ session()->get('delete_notif') }}</div>
+    <div class="alert alert-warning">{{ session()->get('delete_notif') }}</div>
     @endif
     <!-- End alerts -->
 </div>

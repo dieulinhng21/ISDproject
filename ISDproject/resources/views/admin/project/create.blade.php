@@ -57,11 +57,13 @@ input,select,textarea{
             <label>Vị trí </label>&nbsp;&nbsp;
             <input type="text" name="location" value="{{ old('location') }}" required><br><br>
 
-            <label>Trị giá</label>
-            <input type="number" name="price" value="{{ old('price') }}" required>  
-
             <label>Số tòa nhà</label>
-            <input type="number" name="apartment_number" value="{{ old('apartment_number') }}" required><br><br>
+            <input type="number" name="apartment_number" value="{{ old('apartment_number') }}" required>
+
+            <label>Trị giá</label>
+            <input type="number" name="price" value="{{ old('price') }}" required><br><br>  
+
+            
 
             <!-- <label for="status">Tình trạng</label>
             <select name="status" id="status" required>

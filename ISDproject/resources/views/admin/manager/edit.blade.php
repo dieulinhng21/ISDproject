@@ -53,7 +53,7 @@ button {
                             </div>
                             @endif
                 <label>Họ và tên</label>
-                <input name="name" type="text" value="{{$manager->hoten}}" required>
+                <input name="name" type="text" value="{{$manager->hoten}}" required><i>(Họ tên viết không dấu)</i>
                      
                 <label>Vai trò</label>
                 <select name="role">
@@ -61,7 +61,9 @@ button {
                     <option value="viewer">Viewer</option>
                 </select><br><br>
 
-                      
+                <label>Ngày sinh</label>
+                <input type="date" name="dob" value="{{$manager->ngaysinh}}" required>
+
                 <label>SĐT</label>
                 <input name="phone_number" type="number" value="{{$manager->sodienthoai}}" required><br><br>
                        

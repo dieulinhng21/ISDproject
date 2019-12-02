@@ -76,7 +76,7 @@ class ProjectController extends Controller
             $project->tinhtrang = $request->get('status');
             
             $project->save();
-            session()->flash('create_notif','Tạo dự án thành công!');
+            session()->flash('create_notif','Thêm dự án thành công!');
             return redirect('/admin/project');
     }
 
@@ -119,7 +119,7 @@ class ProjectController extends Controller
             'location' => 'required',
             'project_worth' => 'required|numeric|min:0',
             'apartment_number' => 'required|integer|min:0',
-            'status' => 'required'
+            
         ],
         [
             'project_name.required' => 'Tên dự án còn trống',
@@ -137,7 +137,7 @@ class ProjectController extends Controller
             'apartment_number.integer' => 'Số tòa nhà phải là số',
             'apartment_number.min' => 'Số tòa nhà phải lớn hơn 0',
             //
-            'status.required' => 'Tình trạng còn trống'
+            
         ]);          
             $project = Project::find($id);
 
@@ -146,7 +146,6 @@ class ProjectController extends Controller
             $project->vitri = $request->get('location');
             $project->trigia= $request->get('project_worth');
             $project->sotoanha = $request->get('apartment_number');
-            $project->tinhtrang = $request->get('status');
             //luu input
             $project->save();
             session()->flash('update_notif','Cập nhật dự án thành công!');

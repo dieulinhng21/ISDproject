@@ -53,7 +53,7 @@ use Illuminate\Http\Request;
                 'identity_card' => 'required|integer|digits_between:9,10|unique:khachhang,chungminhthu',
                 // 'dob' => 'required|before_or_equal:today',
                 'email' => 'required|email|unique:khachhang,email',
-                'phone_number' => 'required|integer|digits_between:9,10|unique:khachhang,sodienthoai',
+                'phone_number' => 'required|numeric|digits_between:9,10|unique:khachhang,sodienthoai',
                 'inhabitant_number' => 'required',
                 'address' => 'required|max:50'
                 //ghi chú có thể để trống 
@@ -204,9 +204,18 @@ use Illuminate\Http\Request;
          */
         public function destroy($id)
         {
-            $customer = Customer::find($id);
-            $customer->delete();
+            $customer_id = DB::table('khachhang')->where('idkhachhang',$id)->value('idkhachhang');
+            $contract = DB::table('hopdong')->where('idkhachhang',$customer_id)->first();
+            if($contract == null){
+                $customer = Customer::find($id);
+                $customer->delete();
+                return redirect('/admin/customer');
+            }else{
+                session()->flash('delete_notif','Không thể xóa khách hàng vì hợp đồng còn tồn tại!');
+                return redirect('/admin/customer');
+            }
+            
 
-            return redirect('/admin/customer');
+            
         }
     }

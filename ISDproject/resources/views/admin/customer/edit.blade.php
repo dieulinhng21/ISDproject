@@ -56,7 +56,7 @@ input.custom_address{
                             @endforeach
                         </div>
                     @endif
-                    <label for="name">Họ và tên</label>
+                    <label for="name">Họ và tên</label><i>(Họ tên ghi không dấu)</i>
                     <input name="name" type="text" id="name" value="{{$customer->hoten}}" required>
                 
                     <label for="identity_card">CMND</label>
