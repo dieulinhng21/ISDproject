@@ -51,7 +51,7 @@ input.custom_address{
                 @endforeach
             </div>
         @endif
-        <label>Họ tên</label>
+        <label>Họ và tên</label>
         <input type="text" name="name" value="{{ old('name') }}" required autofocus oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
         <i>(Họ tên viết không dấu)</i>
 

@@ -32,7 +32,7 @@ input.custom_address{
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Sửa thông tin khách hàng
+    Quản lý khách hàng
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> AdminAZ</a></li>
@@ -56,14 +56,14 @@ input.custom_address{
                             @endforeach
                         </div>
                     @endif
-                    <label for="name">Họ và tên</label><i>(Họ tên ghi không dấu)</i>
-                    <input name="name" type="text" id="name" value="{{$customer->hoten}}" required>
+                    <label for="name">Họ và tên</label>
+                    <input name="name" type="text" id="name" value="{{$customer->hoten}}" required><i>(Họ tên ghi không dấu)</i><br><br>
                 
                     <label for="identity_card">CMND</label>
-                    <input name="identity_card" type="number" id="identity_card" value="{{$customer->chungminhthu}}" required><br><br>
+                    <input name="identity_card" type="number" id="identity_card" value="{{$customer->chungminhthu}}" required>
                 
-                    <!-- <label for="dob">Ngày sinh</label>
-                    <input name="dob" type="text" id="dob" value="{{$customer->ngaysinh}}" required><i>(tháng/ngày/năm)</i><br><br> -->
+                    <label for="flat">Căn hộ</label>
+                    <input name="flat" type="text" id="flat" value="{{$flat->tencanho}}" required><br><br>
                 
                     <label for="email">Email</label>
                     <input name="email" type="email" class="custom" id="email" value="{{$customer->email}}" required oninvalid="this.setCustomValidity('Định dạng email sai')">
@@ -71,8 +71,8 @@ input.custom_address{
                     <label for="phone_number">SĐT</label>
                     <input name="phone_number" type="number" id="phone_number" value="{{$customer->sodienthoai}}" required><br><br>
                 
-                    <label for="inhabitant_number">Hộ khẩu</label>
-                    <input name="inhabitant_number" type="text" class="custom_address" id="inhabitant_number" value="{{$customer->hokhau}}" required><br><br>
+                    <label for="inhabitant">Hộ khẩu</label>
+                    <input name="inhabitant" type="text" class="custom_address" id="inhabitant" value="{{$customer->hokhau}}" required><br><br>
                 
                     <label>Địa chỉ</label>
                     <input name="address" type="text" class="custom_address" value="{{$customer->diachi}}" required><br><br>

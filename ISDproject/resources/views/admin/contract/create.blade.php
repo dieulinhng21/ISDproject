@@ -30,7 +30,7 @@ input{
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Thêm hợp đồng mới
+        Quản lý hợp đồng
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> AdminAZ</a></li>
@@ -113,7 +113,7 @@ input{
 	  Tại: 
 	  <input type="text" name="noicap" value="{{ old('noicap') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
 	- Hộ khẩu thường trú:
-	<input type="text" name="inhabitant_number" style="width: 350px" value="{{ old('inhabitant_number') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
+	<input type="text" name="inhabitant" style="width: 350px" value="{{ old('inhabitant') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
 	- Địa chỉ liên hệ:
 	<input type="text" name="address"style="width: 350px" value="{{ old('address') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
 	- Điện thoại:	

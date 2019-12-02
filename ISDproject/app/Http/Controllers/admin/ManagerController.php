@@ -150,7 +150,7 @@ class ManagerController extends Controller
 
             $manager->save();
             
-            session()->flash('update_notif','Chỉnh sửa người quản lý thành công!');
+            session()->flash('update_notif','Cập nhật người quản lý thành công!');
             return redirect('/admin/manager');
     }
 
@@ -165,7 +165,7 @@ class ManagerController extends Controller
         $manager = Manager::find($id);
         $manager->delete();
 
-        session()->flash('delete_notif','Xóa người quản lý thành công!');
+        session()->flash('delete_notif','Đã xóa người quản lý thành công!');
         return redirect('/admin/manager');
     }
 }

@@ -27,8 +27,8 @@
                     <table id="example2" class="table table-bordered table-hover">
                         <thead>
                             <tr>
+                                <th>Họ và tên</th>
                                 <th>Căn hộ</th>
-                                <th>Họ tên</th>
                                 <th>CMND</th>
                                 <th>Ngày cấp</th>
                                 <th>Nơi cấp</th>
@@ -43,8 +43,8 @@
                         <tbody>
                             @foreach($customers as $item )
                             <tr>
-                                <td>{{$item->tencanho}}</td>
                                 <td>{{$item->hoten}}</td>
+                                <td>{{$item->tencanho}}</td>
                                 <td>{{$item->chungminhthu}}</td>
                                 <td>{{$item->ngaycap}}</td>
                                 <td>{{$item->noicap}}</td>

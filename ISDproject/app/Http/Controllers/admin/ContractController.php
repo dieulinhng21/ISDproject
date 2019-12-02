@@ -72,7 +72,7 @@ class ContractController extends Controller
             'identity_card' => 'required|numeric|digits_between:9,10|unique:khachhang,chungminhthu',
             'identity_date' => 'required|before_or_equal:today',
             'phone_number' => 'required|numeric|digits_between:9,10|unique:khachhang,sodienthoai',
-            'inhabitant_number' => 'required',
+            'inhabitant' => 'required',
             'address' => 'required'
         ],
         [
@@ -117,7 +117,7 @@ class ContractController extends Controller
             'phone_number.digits_between' => 'Độ dài số điện thoại không hợp lệ',
             'phone_number.unique' => 'Số điện thoại đã tồn tại',
             //
-            'inhabitant_number.required' => 'Hộ khẩu còn trống',
+            'inhabitant.required' => 'Hộ khẩu còn trống',
             //
             'address.required' => 'Địa chỉ còn trống'
         ]); 
@@ -134,7 +134,6 @@ class ContractController extends Controller
             $flat_name = $request->get('tencanho');
             $flat_id = DB::table('canho')->where('tencanho', $flat_name)->value('idcanho');
             $flat_status = DB::table('canho')->where('idcanho', $flat_id)->value('tinhtrang');
-            var_dump($flat_status);
             //nếu căn hộ chưa có ng mua
             if($flat_status == 0){
                 $customer = Customer::create();
@@ -145,7 +144,7 @@ class ContractController extends Controller
                 $customer->ngaycap = $request->get('identity_date');
                 $customer->noicap = $request->get('noicap');
                 $customer->sodienthoai = $request->get('phone_number');
-                $customer->hokhau = $request->get('inhabitant_number');
+                $customer->hokhau = $request->get('inhabitant');
                 $customer->diachi = $request->get('address');
                 $customer->save();
 
@@ -226,17 +225,17 @@ class ContractController extends Controller
         // |unique:hopdong,mahopdong |unique:hopdong,ten_canho |before_or_equal:date
         $request->validate([
             'san' => 'required',
-            'contract_code' => 'required|regex:/^([a-zA-Z0-9\s\-]*)$/',
+            'contract_code' => 'required|regex:/^([a-zA-Z0-9\s\-]*)$/|unique:hopdong,mahopdong,' . $id.',idhopdong',
             'contract_date' => 'required|before_or_equal:today',
             'pay_date' => 'required|after_or_equal:today',
             'extra_date' => 'min:0',
             //validate customer infor before insert to db
             'name' => 'required|max:50',
             'noicap' => 'required|max:50',
-            'identity_card' => 'required|numeric|digits_between:9,10',
+            'identity_card' => 'required|numeric|digits_between:9,10|unique:hopdong,idkhachhang,' . $id.',idhopdong',
             'identity_date' => 'required|before_or_equal:today',
-            'phone_number' => 'required|numeric|digits_between:9,10',
-            'inhabitant_number' => 'required',
+            'phone_number' => 'required|numeric|digits_between:9,10|unique:hopdong,idkhachhang,' . $id.',idhopdong',
+            'inhabitant' => 'required',
             'address' => 'required'
         ],
         [
@@ -275,7 +274,7 @@ class ContractController extends Controller
             'phone_number.numeric' => 'Số điện thoại không chứa ký tự là chữ cái',
             'phone_number.digits_between' => 'Độ dài số điện thoại không hợp lệ',
             //
-            'inhabitant_number.required' => 'Hộ khẩu không được trống',
+            'inhabitant.required' => 'Hộ khẩu không được trống',
             //
             'address.required' => 'Địa chỉ không được trống'
         ]); 
@@ -292,7 +291,7 @@ class ContractController extends Controller
             $customer->ngaycap = $request->get('identity_date');
             $customer->noicap = $request->get('noicap');
             $customer->sodienthoai = $request->get('phone_number');
-            $customer->hokhau = $request->get('inhabitant_number');
+            $customer->hokhau = $request->get('inhabitant');
             $customer->diachi = $request->get('address');
             $customer->save();
 

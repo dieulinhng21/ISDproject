@@ -35,16 +35,10 @@ class FlatController extends Controller
      */
     public function create()
     {
-        $available_project = DB::table('duan')
-                        ->select('duan.idduan','duan.tenduan')
-                        ->distinct()
-                        ->get();
-        $available_apartment = DB::table('toachungcu')
-                        ->select('toachungcu.idtoachungcu','toachungcu.tentoa')
-                        ->distinct()
-                        ->get();
+        $projects = DB::table('duan')->distinct()->get();
+        $apartments = DB::table('toachungcu')->distinct()->get();
         
-        return view("admin.flat.create",['available_project_list'=>$available_project],['available_apartment_list'=>$available_apartment]);
+        return view("admin.flat.create",compact('projects','apartments'));
     }
 
     /**
@@ -58,9 +52,9 @@ class FlatController extends Controller
         $request->validate([
             'project'=>'required',
             'apartment'=>'required',
-            'flat'=>'required|regex:/^([a-zA-Z0-9\s\-]*)$/',
-            'price'=>'required|numeric|min:0',
-            'square'=>'required|numeric|min:0',
+            'flat'=>'required|regex:/^([a-zA-Z0-9\s\-]*)$/|unique:canho,tencanho',
+            'price'=>'required|numeric|min:1',
+            'square'=>'required|numeric|min:1',
             // 'livingroom'=>'required|integer|min:0',
             // 'kitchen'=>'required|integer|min:0',
             'bedroom'=>'required|integer|min:0',
@@ -73,17 +67,17 @@ class FlatController extends Controller
             //
             'apartment.required' => 'Tên tòa chung cư còn trống',
             //
-            'flat.required' => ' Căn hộ còn trống',
-            'flat.regex' => ' Căn hộ chứa ký tự không hợp lệ',
-            'flat.unique' => ' Căn hộ đã tồn tại',
+            'flat.required' => ' Tên căn hộ còn trống',
+            'flat.regex' => ' Tên căn hộ chứa ký tự không hợp lệ',
+            'flat.unique' => ' Tên căn hộ đã tồn tại',
             //
-            'price.required' => 'Trị giá còn trống',
-            'price.numeric' => 'Trị giá phải là số',
-            'price.min' => 'Trị giá phải lớn hơn 0',
+            'price.required' => 'Giá trị căn hộ còn trống',
+            'price.numeric' => 'Giá trị căn hộ phải là số',
+            'price.min' => 'Giá trị căn hộ không hợp lệ',
             //
-            'square.required' => 'Diện tích còn trống',
-            'square.numeric' => 'Diện tích phải là dạng số',
-            'square.min' => 'Diện tích phải lớn hơn 0',
+            'square.required' => 'Diện tích căn hộ còn trống',
+            'square.numeric' => 'Diện tích căn hộ phải là dạng số',
+            'square.min' => 'Diện tích căn hộ không hợp lệ',
             //
             // 'livingroom.required' => 'Số phòng khách còn trống',
             // 'livingroom.integer' => 'Số phòng khách phải là số nguyên',
@@ -111,7 +105,7 @@ class FlatController extends Controller
             // $flat->sophongkhach= $request->get('livingroom');
             // $flat->sophongbep= $request->get('kitchen');
             $flat->sophongngu= $request->get('bedroom');
-            $flat->sophongbep= $request->get('bathroom');
+            $flat->sophongvesinh= $request->get('bathroom');
             $flat->tinhtrang= $request->get('status');
 
 
@@ -140,16 +134,10 @@ class FlatController extends Controller
     public function edit($id)
     {
         $flat = Flat::find($id);
-        // $projects = DB::table('duan')
-        //                 ->select('duan.idduan','duan.tenduan')
-        //                 ->distinct()
-        //                 ->get();
-        $apartments = DB::table('toachungcu')
-                        ->select('toachungcu.idtoachungcu','toachungcu.tentoa')
-                        ->distinct()
-                        ->get();
+        $projects = DB::table('duan')->distinct()->get();
+        $apartments = DB::table('toachungcu')->distinct()->get();
 
-        return view("admin.flat.edit",compact('flat'),['apartments'=>$apartments]);
+        return view("admin.flat.edit",compact('flat','projects','apartments'));
     }
 
     /**
@@ -164,9 +152,9 @@ class FlatController extends Controller
         $request->validate([
             'project'=>'required',
             'apartment'=>'required',
-            'flat'=>'required|regex:/^([a-zA-Z0-9\s\-]*)$/',
-            'price'=>'required|numeric|min:0',
-            'square'=>'required|numeric|min:0',
+            'flat'=>'required|regex:/^([a-zA-Z0-9\s\-]*)$/|unique:canho,tencanho,' . $id.',idcanho',
+            'price'=>'required|numeric|min:1',
+            'square'=>'required|numeric|min:1',
             // 'livingroom'=>'required|integer|min:0',
             // 'kitchen'=>'required|integer|min:0',
             'bedroom'=>'required|integer|min:0',
@@ -178,17 +166,17 @@ class FlatController extends Controller
             //
             'apartment.required' => 'Tên tòa chung cư còn trống',
             //
-            'flat.required' => ' Căn hộ còn trống',
-            'flat.regex' => ' Căn hộ chứa ký tự không hợp lệ',
-            'flat.unique' => ' Căn hộ đã tồn tại',
+            'flat.required' => ' Tên căn hộ còn trống',
+            'flat.regex' => ' Tên căn hộ chứa ký tự không hợp lệ',
+            'flat.unique' => ' Tên căn hộ đã tồn tại',
             //
-            'price.required' => 'Trị giá còn trống',
-            'price.numeric' => 'Trị giá phải là số',
-            'price.min' => 'Trị giá phải lớn hơn 0',
+            'price.required' => 'Giá trị căn hộ còn trống',
+            'price.numeric' => 'Giá trị căn hộ phải là số',
+            'price.min' => 'Giá trị căn hộ không hợp lệ',
             //
-            'square.required' => 'Diện tích còn trống',
-            'square.numeric' => 'Diện tích phải là dạng số',
-            'square.min' => 'Diện tích phải lớn hơn 0',
+            'square.required' => 'Diện tích căn hộ còn trống',
+            'square.numeric' => 'Diện tích căn hộ phải là dạng số',
+            'square.min' => 'Diện tích căn hộ không hợp lệ',
             //
             // 'livingroom.required' => 'Số phòng khách còn trống',
             // 'livingroom.integer' => 'Số phòng khách phải là số nguyên',
@@ -215,7 +203,7 @@ class FlatController extends Controller
             // $flat->sophongkhach= $request->get('livingroom');
             // $flat->sophongbep= $request->get('kitchen');
             $flat->sophongngu= $request->get('bedroom');
-            $flat->sophongbep= $request->get('bathroom');
+            $flat->sophongvesinh= $request->get('bathroom');
             $flat->tinhtrang= $request->get('status');
 
             $flat->save();

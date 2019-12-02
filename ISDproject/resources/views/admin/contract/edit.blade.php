@@ -97,7 +97,7 @@ input{
 	  Ngày cấp<input type="date" name="identity_date" style="width:200px" value="{{ $customer->ngaycap }}" required>
 	  &nbsp;&nbsp;
 	  Tại<input type="text" name="noicap" value="{{ $customer->noicap }}" required><br><br>
-	- Hộ khẩu thường trú:<input type="text" name="inhabitant_number" style="width: 350px" value="{{ $customer->hokhau }}" required><br><br>
+	- Hộ khẩu thường trú:<input type="text" name="inhabitant" style="width: 350px" value="{{ $customer->hokhau }}" required><br><br>
 	- Địa chỉ liên hệ:<input type="text" name="address"style="width: 350px" value="{{ $customer->diachi }}" required><br><br>
 	- Điện thoại:	<input type="number" name="phone_number" value="{{ $customer->sodienthoai }}" required><br><br>
 

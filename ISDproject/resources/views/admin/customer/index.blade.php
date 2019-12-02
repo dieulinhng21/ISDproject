@@ -69,9 +69,9 @@
                     <table id="example2" class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>Căn hộ</th>
-                                <th>Họ tên</th>
+                                <th>Họ và tên</th>
                                 <th>CMND</th>
+                                <th>Căn hộ</th>
                                 <th>Hộ khẩu</th>
                                 <th>Địa chỉ</th>
                                 <th>Email</th>
@@ -83,9 +83,9 @@
                         <tbody>
                             @foreach($customer_array as $item )
                             <tr>
-                                <td>{{$item->tencanho}}</td>
                                 <td>{{$item->hoten}}</td>
                                 <td>{{$item->chungminhthu}}</td>
+                                <td>{{$item->tencanho}}</td>
                                 <td>{{$item->hokhau}}</td>
                                 <td>{{$item->diachi}}</td>
                                 <td>{{$item->email}}</td>

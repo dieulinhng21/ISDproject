@@ -62,7 +62,7 @@
                         <tbody>
                             @foreach ($contract_array as $item )
                             <tr>
-                                <td>{{$item->san}}</td>
+                                <td>{{$item->mahopdong}}</td>
                                 <td>{{$item->tenduan}}</td>
                                 <td>{{$item->tencanho}}</td>
                                 <td>{{$item->hoten}}</td>

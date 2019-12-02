@@ -45,7 +45,7 @@
                     <table id="example2" class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>Tên căn</th>
+                                <th>Tên căn hộ</th>
                                 <th>Tên dự án</th>
                                 <th>Tên chung cư</th>
                                 <!-- <th>Số phòng ngủ</th> -->
@@ -69,9 +69,9 @@
                                 <td>{{$item->dientich}}</td>
                                 <td>
                                 {{$item->sophongngu}} phòng ngủ,
-                                {{$item->sophongbep}} phòng bếp,
                                 {{$item->sophongvesinh}} phòng vệ sinh,
-                                {{$item->sophongkhach}} phòng khách
+                                {{$item->sophongkhach}} phòng khách,
+                                {{$item->sophongbep}} phòng bếp
                                 </td>
                                 @if($item->tinhtrang == 1)
                                     <td>Đã có người mua</td>

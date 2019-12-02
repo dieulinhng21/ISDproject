@@ -50,19 +50,21 @@ button {
                 @endforeach
                 </div>
             @endif
-            <label>Tên căn</label>               
+
+            <label>Tên căn hộ</label>               
             <input name="flat" type="text" value="{{$flat->tencanho}}">
 
             <label for="project">Tên dự án</label>
             <!-- $available_project_list from edit function in FlatController -->
-            <select name="project">
-                    <option value="1">AZ Lâm Viên</option>
-                    <option value="2">AZ Five Stars</option>
-                    <option value="3">AZ SKY Tower</option>
-                    <option value="4">AZ Vân Canh Tower</option>
+            <select name="project_name" id="project_name">Dự án: 
+            @if(isset($projects))
+                @foreach($projects as $project)
+                    <option value="{{$project->idduan}}">{{$project->tenduan}}</option>
+                @endforeach
+            @endif
             </select>
 
-            <label for="apartment">Tòa chung cư</label>
+            <label for="apartment">Tên chung cư</label>
             <select name="apartment">
             @foreach($apartments as $apartment)
                     <option value="{{$apartment->idtoachungcu}}">{{$apartment->tentoa}}</option>
@@ -72,14 +74,10 @@ button {
             <label>Giá trị</label>
             <input name="price" type="number" value="{{$flat->giatri}}"><br><br>
         
+            
+            <label>Diện tích</label>
+            <input class="detail" name="square" type="number" value="{{$flat->dientich}}" required> mét vuông<br><br>
             <label>Chi tiết</label>
-            Diện tích:
-            <input class="detail" name="square" type="number" value="{{$flat->dientich}}" required> mét vuông
-            <!-- - Số phòng khách:
-            <input class="detail" name="livingroom" type="number" value="{{$flat->sophongkhach}}" required>
-            - Số phòng bếp:
-            <input class="detail" name="kitchen" type="number" value="{{$flat->sophongbep}}" required><br><br> -->
-            - 
             <input class="detail" name="bedroom" type="number" value="{{$flat->sophongngu}}" required> phòng ngủ
             - 
             <input class="detail" name="bathroom" type="number" value="{{$flat->sophongvesinh}}" required> phòng vệ sinh

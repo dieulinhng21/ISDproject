@@ -63,7 +63,7 @@ class ApartmentController extends Controller
             //
             'begin_trade_floor.required' => 'Tầng bắt đầu thương mại còn trống',
             'begin_trade_floor.integer' => 'Tầng bắt đầu thương mại phải là số nguyên',
-            'begin_trade_floor.min'=> 'Tầng bắt đầu thương mại phải bắt đầu từ 1',
+            'begin_trade_floor.min'=> 'Tầng thương mại phải bắt đầu từ tầng 1',
             //
             'end_trade_floor.required' => 'Tầng kết thúc thương mại còn trống',
             'end_trade_floor.integer' => 'Tầng kết thúc thương mại phải là số nguyên',
@@ -129,10 +129,10 @@ class ApartmentController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'apartment_name' => 'required|regex:/^([a-zA-Z0-9\s\-]*)$/|max:50',
+            'apartment_name' => 'required|regex:/^([a-zA-Z0-9\s\-]*)$/|max:50|unique:toachungcu,tentoa,' . $id.',idtoachungcu',
             'begin_people_floor' => 'required|integer|min:0',
             'end_people_floor' => 'required|integer|min:0',
-            'begin_trade_floor' => 'required|integer|min:0',
+            'begin_trade_floor' => 'required|integer|min:1',
             'end_trade_floor' => 'required|integer|min:0',
             'manage_team' => 'required|regex:/^([a-zA-Z0-9\s\-]*)$/|max:50',
         ],
@@ -147,7 +147,7 @@ class ApartmentController extends Controller
             //
             'end_trade_floor.required' => 'Tầng kết thúc thương mại còn trống',
             'end_trade_floor.integer' => 'Tầng kết thúc thương mại phải là dạng số',
-            'end_trade_floor.min' => 'Tầng kết thúc thương mại phải là số dương',
+            'end_trade_floor.min' => 'Tầng thương mại phải bắt đầu từ tầng 1',
             //
             'begin_people_floor.required' => 'Tầng bắt đầu dân cư còn trống',
             'begin_people_floor.integer' => 'Tầng bắt đầu dân cư phải là dạng số',

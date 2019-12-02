@@ -29,7 +29,7 @@ margin-left: 50%;
 <!-- Content Header (Page header) -->
 <section class="content-header">
 <h1>
-    Thêm khách hàng
+Quản lý khách hàng
 </h1>
 <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> AdminAZ</a></li>
@@ -51,7 +51,7 @@ margin-left: 50%;
         @endforeach
         </div>
     @endif
-        <label>Họ tên</label>
+        <label>Họ và tên</label>
         <input type="text" name="name" value="{{ old('name') }}" autofocus required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
         <i>(Họ tên viết không dấu)</i><br><br>
 
@@ -80,7 +80,7 @@ margin-left: 50%;
         <input type="number" name="phone_number" value="{{ old('phone_number') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
 
         <label>Hộ khẩu</label>
-        <input class="custom_address" type="text" name="inhabitant_number" value="{{ old('inhabitant_number') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
+        <input class="custom_address" type="text" name="inhabitant" value="{{ old('inhabitant_number') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
 
         <label>Địa chỉ</label>
         <input class="custom_address" type="text" name="address" value="{{ old('address') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>

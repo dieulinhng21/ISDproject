@@ -3,6 +3,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\admin\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\Customer;
+use App\Models\Flat;
 use App\Http\Requests;
 
 use Illuminate\Http\Request;
@@ -54,7 +55,7 @@ use Illuminate\Http\Request;
                 // 'dob' => 'required|before_or_equal:today',
                 'email' => 'required|email|unique:khachhang,email',
                 'phone_number' => 'required|numeric|digits_between:9,10|unique:khachhang,sodienthoai',
-                'inhabitant_number' => 'required',
+                'inhabitant' => 'required',
                 'address' => 'required|max:50'
                 //ghi chú có thể để trống 
             ],
@@ -81,11 +82,12 @@ use Illuminate\Http\Request;
                 'phone_number.digits_between' => 'Số điện thoại không hợp lệ',
                 'phone_number.unique' => 'Số điện thoại đã tồn tại',
                 //
-                'inhabitant_number.required' => 'Hộ khẩu còn trống',
+                'inhabitant.required' => 'Hộ khẩu còn trống',
                 //
                 'address.required' => 'Địa chỉ còn trống',
                 'address.max' => 'Địa chỉ không hợp lệ',
             ]);
+                
                 $customer = Customer::create();
                 
                 $customer->hoten= $request->get('name');
@@ -94,7 +96,7 @@ use Illuminate\Http\Request;
                 $customer->chungminhthu = $request->get('identity_card');
                 $customer->email = $request->get('email');
                 $customer->sodienthoai = $request->get('phone_number');
-                $customer->hokhau = $request->get('inhabitant_number');
+                $customer->hokhau = $request->get('inhabitant');
                 $customer->diachi = $request->get('address');
                 $customer->ghichu = $request->get('note');
 
@@ -128,10 +130,13 @@ use Illuminate\Http\Request;
          * @param  int  $id
          * @return \Illuminate\Http\Response
          */
-        public function edit($id)
-        {
-            $customer = Customer::find($id);
-            return view("admin.customer.edit", compact('customer'));
+        public function edit($id){
+            $customer= Customer::find($id);
+            $customer_id = $customer->idkhachhang;
+            $flat_id = DB::table('khachhang')->where('idkhachhang', $customer_id)->value('idcanho');
+            $flat = Flat::find($flat_id);
+            
+            return view("admin.customer.edit", compact('customer','flat'));
         }
 
         /**
@@ -145,13 +150,13 @@ use Illuminate\Http\Request;
         {
             $request->validate([
                 'name' => 'required|regex:/^([a-zA-Z\s\-]*)$/|max:50',
-                // 'dob' => 'required|before_or_equal:today',
                 'identity_card' => 'required|numeric|digits_between:9,10',
-                'email' => 'required|email',
-                'phone_number' => 'required|numeric|digits_between:9,10',
-                'inhabitant_number' => 'required',
+                'email' => 'required|unique:khachhang,email,' . $id.',idkhachhang',
+                'phone_number' => 'required|digits_between:9,10|unique:khachhang,sodienthoai,' . $id.',idkhachhang',
+                'inhabitant' => 'required',
                 'address' => 'required',
-                'note' => 'required'
+                'flat' => 'required|unique:canho,tencanho,' . $id.',idcanho',
+                // 'note' => 'required'
             ],
             [
                 'name.required' => 'Tên khách hàng còn trống',
@@ -162,23 +167,28 @@ use Illuminate\Http\Request;
                 // 'dob.before_or_equal' => 'Ngày tháng năm sinh không hợp lệ',
                 //
                 'identity_card.required' => 'Số chứng minh còn trống',
-                'identity_card.required' => 'Số chứng minh chứa ký tự không hợp lệ',
+                'identity_card.numeric' => 'Số chứng minh chứa ký tự không hợp lệ',
                 'identity_card.digits_between' => 'Độ dài số chứng minh thư không hợp lệ',// chứng minh thư p dài từ 9-10 ký tự
                 //
                 'email.required' => 'Email còn trống',
                 'email.email' => 'Địa chỉ email không hợp lệ',
+                'email.unique' => 'Địa chỉ email đã tồn tại',
                 //
                 'phone_number.required' => 'Số điện thoại còn trống',
                 'phone_number.numeric' => 'Số điện thoại không chứa ký tự là chữ cái',
                 'phone_number.digits_between' => 'Độ dài số điện thoại không hợp lệ',
-                // 'phone_number.unique' => 'Số điện thoại đã tồn tại',
+                'phone_number.unique' => 'Số điện thoại đã tồn tại',
                 //
-                'inhabitant_number.required' => 'Hộ khẩu không được trống',
+                'inhabitant.required' => 'Hộ khẩu không được trống',
                 //
                 'address.required' => 'Địa chỉ không được trống',
                 //
-                'note.required' => 'Ghi chú không được trống'
+                'flat.required' => 'Tên căn hộ còn trống',
+                'flat.unique' => 'Căn hộ đã có người mua',
+                // 'note.required' => 'Ghi chú không được trống'
             ]);
+                $flat_name = $request->get('flat');
+                $flat_id = DB::table('canho')->where('tencanho', $flat_name)->value('idcanho');
                 $customer = Customer::find($id);
                 
                 $customer->hoten= $request->get('name');
@@ -186,14 +196,21 @@ use Illuminate\Http\Request;
                 $customer->chungminhthu = $request->get('identity_card');
                 $customer->email = $request->get('email');
                 $customer->sodienthoai = $request->get('phone_number');
-                $customer->hokhau = $request->get('inhabitant_number');
+                $customer->hokhau = $request->get('inhabitant');
                 $customer->diachi = $request->get('address');
                 $customer->ghichu = $request->get('note');
-
                 $customer->save();
+
                 
+                $flat = Flat::find($flat_id);
+                $flat->tinhtrang = 1;
+                $flat->save();
+
                 session()->flash('update_notif','Cập nhật khách hàng thành công!');
                 return redirect('/admin/customer');
+                // }else{
+                //     return redirect('/admin/customer/create')->withErrors("Căn hộ đã có người mua")->withInput();
+                // }
         }
 
         /**
