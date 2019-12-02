@@ -46,7 +46,7 @@ class ApartmentController extends Controller
     {
         $request->validate([
             'project_name' => 'required',
-            'apartment_name' => 'required|regex:/^([a-zA-Z0-9\s\-]*)$/|max:50',
+            'apartment_name' => 'required|regex:/^([a-zA-Z0-9\s\-]*)$/|max:50|unique:toachungcu,tentoa',
             'begin_trade_floor' => 'required|integer|min:1',
             'end_trade_floor' => 'required|integer|min:0',
             'begin_people_floor' => 'required|integer|min:0',
@@ -58,7 +58,8 @@ class ApartmentController extends Controller
             //
             'apartment_name.required' => 'Tên tòa chung cư còn trống',
             'apartment_name.regex' => 'Tên tòa chung cư chứa ký tự không hợp lệ',
-            'apartment_name.max' => 'Tên  vượt quá số ký tự cho phép',
+            'apartment_name.max' => 'Tên tòa chung cư vượt quá số ký tự cho phép',
+            'apartment_name.unique' => 'Tên tòa chung cư đã tồn tại',
             //
             'begin_trade_floor.required' => 'Tầng bắt đầu thương mại còn trống',
             'begin_trade_floor.integer' => 'Tầng bắt đầu thương mại phải là số nguyên',

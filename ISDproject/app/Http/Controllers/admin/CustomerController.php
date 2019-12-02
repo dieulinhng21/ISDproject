@@ -209,9 +209,10 @@ use Illuminate\Http\Request;
             if($contract == null){
                 $customer = Customer::find($id);
                 $customer->delete();
+                session()->flash('delete_notif','Đã xóa khách hàng');
                 return redirect('/admin/customer');
             }else{
-                session()->flash('delete_notif','Không thể xóa khách hàng vì hợp đồng còn tồn tại!');
+                session()->flash('invalid_notif','Không thể xóa khách hàng vì hợp đồng còn tồn tại!');
                 return redirect('/admin/customer');
             }
             

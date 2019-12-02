@@ -70,7 +70,7 @@ input.custom_address{
         <input type="number" name="phone_number" value="{{ old('phone_number') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
 
         <label>Email</label>
-        <input type="email" name="email" class="custom" value="{{ old('email') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninvalid="this.setCustomValidity('Định dạng email sai')"><br><br>
+        <input type="email" name="email" class="custom" value="{{ old('email') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
 
         <label>Địa chỉ</label>
         <input class="custom_address" type="text" name="address" value="{{ old('address') }}"required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>

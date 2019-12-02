@@ -74,7 +74,7 @@ margin-left: 50%;
         
 
         <label>Email</label>
-        <input class="custom" type="email" name="email" value="{{ old('email') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninvalid="this.setCustomValidity('Định dạng email sai')">
+        <input class="custom" type="email" name="email" value="{{ old('email') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
 
         <label>SĐT</label>
         <input type="number" name="phone_number" value="{{ old('phone_number') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>

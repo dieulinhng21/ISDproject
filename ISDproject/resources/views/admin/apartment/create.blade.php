@@ -78,13 +78,13 @@ button {
             <label>Tầng dân cư</label>
             Từ tầng 
             <input class="detail" type="number" name="begin_people_floor"
-            value="{{ old('begin_people_ floor') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
+            value="{{ old('begin_people_floor') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
             đến 
             <input class="detail" type="number" name="end_people_floor"
             value="{{ old('end_people_floor') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
 
             <label for="status">Đơn vị quản lý</label>
-            <input  type="text" name="manage_team" value="{{ old('apartment_name') }}" 
+            <input  type="text" name="manage_team" value="{{ old('manage_team') }}" 
             required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
             <i>(Tên đơn vị quản lý viết không dấu)</i><br><br>
 
