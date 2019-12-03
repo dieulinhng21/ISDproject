@@ -52,7 +52,7 @@ button {
             @endif
 
             <label>Tên căn hộ</label>               
-            <input name="flat" type="text" value="{{$flat->tencanho}}">
+            <input name="flat" type="text" value="{{$flat->tencanho}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
 
             <label for="project">Tên dự án</label>
             <!-- $available_project_list from edit function in FlatController -->
@@ -72,15 +72,15 @@ button {
             </select><br><br>
         
             <label>Giá trị</label>
-            <input name="price" type="number" value="{{$flat->giatri}}"><br><br>
+            <input name="price" type="number" value="{{$flat->giatri}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
         
             
             <label>Diện tích</label>
-            <input class="detail" name="square" type="number" value="{{$flat->dientich}}" required> mét vuông<br><br>
+            <input class="detail" name="square" type="number" value="{{$flat->dientich}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"> mét vuông<br><br>
             <label>Chi tiết</label>
-            <input class="detail" name="bedroom" type="number" value="{{$flat->sophongngu}}" required> phòng ngủ
+            <input class="detail" name="bedroom" type="number" value="{{$flat->sophongngu}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"> phòng ngủ
             - 
-            <input class="detail" name="bathroom" type="number" value="{{$flat->sophongvesinh}}" required> phòng vệ sinh
+            <input class="detail" name="bathroom" type="number" value="{{$flat->sophongvesinh}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"> phòng vệ sinh
             - 1 phòng khách - 1 phòng bếp<br><br>
             
             <label>Tình trạng:</label>

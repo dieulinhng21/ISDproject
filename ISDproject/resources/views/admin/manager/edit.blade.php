@@ -53,7 +53,7 @@ button {
                             </div>
                             @endif
                 <label>Họ và tên</label>
-                <input name="name" type="text" value="{{$manager->hoten}}" required><i>(Họ tên viết không dấu)</i>
+                <input name="name" type="text" value="{{$manager->hoten}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><i>(Họ tên viết không dấu)</i>
                      
                 <label>Vai trò</label>
                 <select name="role">
@@ -62,16 +62,16 @@ button {
                 </select><br><br>
 
                 <label>Ngày sinh</label>
-                <input type="date" name="dob" value="{{$manager->ngaysinh}}" required>
+                <input type="date" name="dob" value="{{$manager->ngaysinh}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
 
                 <label>SĐT</label>
-                <input name="phone_number" type="number" value="{{$manager->sodienthoai}}" required><br><br>
+                <input name="phone_number" type="number" value="{{$manager->sodienthoai}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
                        
                 <label>Email</label>
-                <input name="email" type="email" class="custom" value="{{$manager->email}}" required oninvalid="this.setCustomValidity('Định dạng email sai')"><br><br>
+                <input name="email" type="email" class="custom" value="{{$manager->email}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninvalid="this.setCustomValidity('Định dạng email sai')"><br><br>
                        
                 <label>Địa chỉ</label>
-                <input name="address" type="text" class="custom_address" value="{{$manager->diachi}}" required><br><br>
+                <input name="address" type="text" class="custom_address" value="{{$manager->diachi}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
                 
                 <button type="submit" class="btn btn-primary">Lưu</button>
                    

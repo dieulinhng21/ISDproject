@@ -138,12 +138,13 @@ use Illuminate\Http\Request;
          */
         public function edit($id){
             if (Gate::allows('admin', Auth::user())){
+                $flats = DB::table('canho')->where('tinhtrang','0')->get();
                 $customer= Customer::find($id);
                 $customer_id = $customer->idkhachhang;
                 $flat_id = DB::table('khachhang')->where('idkhachhang', $customer_id)->value('idcanho');
                 $flat = Flat::find($flat_id);
                 
-                return view("admin.customer.edit", compact('customer','flat'));
+                return view("admin.customer.edit", compact('customer','flats'));
             }else{
                 return view("../404");
             }

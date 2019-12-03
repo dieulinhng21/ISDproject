@@ -55,23 +55,23 @@ input.custom{
         </select>
         
         <label>Tên tòa chung cư</label>
-        <input name="apartment_name" type="text" value="{{$apartment->tentoa}}" required><br><br>
+        <input name="apartment_name" type="text" value="{{$apartment->tentoa}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
         
         <label>Tầng thương mại</label>
         Từ: 
-        <input class="custom" name="begin_trade_floor" type="number" value="{{$apartment->batdauthuongmai}}" required>
+        <input class="custom" name="begin_trade_floor" type="number" value="{{$apartment->batdauthuongmai}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
         đến:
-        <input class="custom" name="end_trade_floor" type="number" value="{{$apartment->ketthucthuongmai}}" required>
+        <input class="custom" name="end_trade_floor" type="number" value="{{$apartment->ketthucthuongmai}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
         
         <label>Tầng dân cư</label>
         Từ:
-        <input class="custom" name="begin_people_floor" type="number" value="{{$apartment->batdaudancu}}" required>
+        <input class="custom" name="begin_people_floor" type="number" value="{{$apartment->batdaudancu}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
         đến:
-        <input class="custom" name="end_people_floor" type="number" value="{{$apartment->ketthucdancu}}" required><br><br>
+        <input class="custom" name="end_people_floor" type="number" value="{{$apartment->ketthucdancu}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
 
         
-        <label>Tình trạng</label>
-        <input name="manage_team" type="text" value="{{$apartment->donviquanly}}" required>
+        <label>Đơn vị quản lý</label>
+        <input name="manage_team" type="text" value="{{$apartment->donviquanly}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
         <i>(Tên đơn vị quản lý viết không dấu)</i><br><br>
 
         <button type="submit" class="btn btn-primary">Lưu</button>

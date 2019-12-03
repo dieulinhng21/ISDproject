@@ -48,7 +48,7 @@ class ProjectController extends Controller
             'project_name' => 'required|regex:/^([a-zA-Z\s\-]*)$/|unique:duan,tenduan',
             'company' => 'required|regex:/^([a-zA-Z\s\-]*)$/',
             'location' => 'required',
-            'price' => 'required|numeric|min:0',
+            'price' => 'required|numeric|min:1',
             'apartment_number' => 'required|numeric| min:1'
             // 'status' => 'required'
         ],
@@ -63,11 +63,11 @@ class ProjectController extends Controller
             'location.required' => 'Vị trí còn trống',
             //
             'price.required' => 'Trị giá còn trống',
-            'price.numeric' => 'Trị giá phải là số',
-            'price.min' => 'Trị giá phải là số dương',
+            'price.numeric' => 'Trị giáphải có dạng số',
+            'price.min' => 'Trị giá phải lớn hơn 1',
             //
             'apartment_number.required' => 'Số tòa nhà còn trống',
-            'apartment_number.numeric' => 'Số tòa nhà phải là số',
+            'apartment_number.numeric' => 'Số tòa nhà phải có dạng số',
             'apartment_number.min' => 'Số tòa nhà phải lớn hơn 1',
             // 'status.required' => 'Tình trạng còn trống'
             // 'date_format:Y-m-d' => 'Ngày tháng theo định dạng năm-tháng-ngày',
@@ -125,7 +125,7 @@ class ProjectController extends Controller
     {
         $request->validate([
             'project_name' => 'required|regex:/^([a-zA-Z\s\-]*)$/',
-            'company' => 'required',
+            'company' => 'required|regex:/^([a-zA-Z\s\-]*)$/',
             'location' => 'required',
             'price' => 'required|numeric|min:1',
             'apartment_number' => 'required|integer|min:1',
@@ -136,16 +136,17 @@ class ProjectController extends Controller
             'project_name.regex' => 'Tên dự án chứa ký tự không hợp lệ',
             //
             'company.required' => 'Công ty trực thuộc còn trống',
+            'company.regex' => 'Công ty trực thuộc chứa ký tự không hợp lệ',
             //
             'location.required' => 'Vị trí còn trống',
             //
             'price.required' => 'Trị giá dự án còn trống',
-            'price.numeric' => 'Trị giá dự án phải là số',
+            'price.numeric' => 'Trị giá dự án phải có dạng số',
             'price.min' => 'Trị giá dự án phải lớn hơn 1',
             //
             'apartment_number.required' => 'Số tòa nhà còn trống',
-            'apartment_number.integer' => 'Số tòa nhà phải là số',
-            'apartment_number.min' => 'Trị giá phải là số dương',
+            'apartment_number.integer' => 'Số tòa nhà phải có dạng số',
+            'apartment_number.min' => 'Số tòa nhà phải lớn hơn 1',
             //
             
         ]);          
@@ -154,7 +155,7 @@ class ProjectController extends Controller
             $project->tenduan= $request->get('project_name');
             $project->congtytructhuoc = $request->get('company');
             $project->vitri = $request->get('location');
-            $project->trigia= $request->get('project_worth');
+            $project->trigia= $request->get('price');
             $project->sotoanha = $request->get('apartment_number');
             //luu input
             $project->save();

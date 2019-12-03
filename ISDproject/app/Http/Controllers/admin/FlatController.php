@@ -56,20 +56,20 @@ class FlatController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'project'=>'required',
+            // 'project'=>'required',
             'apartment'=>'required',
             'flat'=>'required|regex:/^([a-zA-Z0-9\s\-]*)$/|unique:canho,tencanho',
             'price'=>'required|numeric|min:1',
             'square'=>'required|numeric|min:1',
             // 'livingroom'=>'required|integer|min:0',
             // 'kitchen'=>'required|integer|min:0',
-            'bedroom'=>'required|integer|min:0',
-            'bathroom'=>'required|integer|min:0',
+            'bedroom'=>'required|integer|min:1',
+            'bathroom'=>'required|integer|min:1',
 
 
         ],
         [
-            'project.required' => 'Tên dự án còn trống',
+            // 'project.required' => 'Tên dự án còn trống',
             //
             'apartment.required' => 'Tên tòa chung cư còn trống',
             //
@@ -91,7 +91,7 @@ class FlatController extends Controller
             //
             'bedroom.required' => 'Số phòng ngủ còn trống',
             'bedroom.integer' => 'Số phòng ngủ phải là số nguyên',
-            'bedroom.min' => 'Số phòng ngủ phải lớn hơn 0',
+            'bedroom.min' => 'Số phòng ngủ phải lớn hơn 1',
             //
             // 'kitchen.required' => 'Số phòng bếp còn trống',
             // 'kitchen.integer' => 'Số phòng bếp phải là số nguyên',
@@ -99,7 +99,7 @@ class FlatController extends Controller
             //
             'bathroom.required' => 'Số phòng vệ sinh còn trống',
             'bathroom.integer' => 'Số phòng vệ sinh phải là số nguyên',
-            'bathroom.min' => 'Số phòng vệ sinh phải lớn hơn 0',
+            'bathroom.min' => 'Số phòng vệ sinh phải lớn hơn 1',
         ]);
             $flat = Flat::create();
             
@@ -160,19 +160,19 @@ class FlatController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'project'=>'required',
+            // 'project'=>'required',
             'apartment'=>'required',
             'flat'=>'required|regex:/^([a-zA-Z0-9\s\-]*)$/|unique:canho,tencanho,' . $id.',idcanho',
             'price'=>'required|numeric|min:1',
             'square'=>'required|numeric|min:1',
             // 'livingroom'=>'required|integer|min:0',
             // 'kitchen'=>'required|integer|min:0',
-            'bedroom'=>'required|integer|min:0',
-            'bathroom'=>'required|integer|min:0'
+            'bedroom'=>'required|integer|min:1',
+            'bathroom'=>'required|integer|min:1'
 
         ],
         [
-            'project.required' => 'Tên dự án còn trống',
+            // 'project.required' => 'Tên dự án còn trống',
             //
             'apartment.required' => 'Tên tòa chung cư còn trống',
             //
@@ -194,7 +194,7 @@ class FlatController extends Controller
             //
             'bedroom.required' => 'Số phòng ngủ còn trống',
             'bedroom.integer' => 'Số phòng ngủ phải là số nguyên',
-            'bedroom.min' => 'Số phòng ngủ phải lớn hơn 0',
+            'bedroom.min' => 'Số phòng ngủ phải lớn hơn 1',
             //
             // 'kitchen.required' => 'Số phòng bếp còn trống',
             // 'kitchen.integer' => 'Số phòng bếp phải là số nguyên',
@@ -202,7 +202,7 @@ class FlatController extends Controller
             //
             'bathroom.required' => 'Số phòng vệ sinh còn trống',
             'bathroom.integer' => 'Số phòng vệ sinh phải là số nguyên',
-            'bathroom.min' => 'Số phòng vệ sinh phải lớn hơn 0',
+            'bathroom.min' => 'Số phòng vệ sinh phải lớn hơn 1',
         ]);
             $flat = Flat::find($id);
             

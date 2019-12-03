@@ -63,7 +63,7 @@ button {
             @endforeach
             </select><br><br>
 
-            <label>Tòa chung cư</label>
+            <label>Tên tòa chung cư</label>
             <input class="custom" type="text" name="apartment_name" value="{{ old('apartment_name') }}" 
             required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
 

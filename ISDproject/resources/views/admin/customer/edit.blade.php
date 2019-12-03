@@ -57,25 +57,30 @@ input.custom_address{
                         </div>
                     @endif
                     <label for="name">Họ và tên</label>
-                    <input name="name" type="text" id="name" value="{{$customer->hoten}}" required><i>(Họ tên ghi không dấu)</i><br><br>
+                    <input name="name" type="text" id="name" value="{{$customer->hoten}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><i>(Họ tên ghi không dấu)</i><br><br>
                 
                     <label for="identity_card">CMND</label>
-                    <input name="identity_card" type="number" id="identity_card" value="{{$customer->chungminhthu}}" required>
+                    <input name="identity_card" type="number" id="identity_card" value="{{$customer->chungminhthu}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
                 
-                    <label for="flat">Căn hộ</label>
-                    <input name="flat" type="text" id="flat" value="{{$flat->tencanho}}" required><br><br>
+                    <label>Căn hộ</label>
+                    <select name="flat">
+                    <!-- hiện ra các căn hộ còn trống -->
+                    @foreach($flats as $flat)
+                        <option value="{{$flat->idcanho}}">{{$flat->tencanho}}</option>
+                    @endforeach
+                    </select><br><br>
                 
                     <label for="email">Email</label>
-                    <input name="email" type="email" class="custom" id="email" value="{{$customer->email}}" required oninvalid="this.setCustomValidity('Định dạng email sai')">
+                    <input name="email" type="email" class="custom" id="email" value="{{$customer->email}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"oninvalid="this.setCustomValidity('Định dạng email sai')">
                 
                     <label for="phone_number">SĐT</label>
-                    <input name="phone_number" type="number" id="phone_number" value="{{$customer->sodienthoai}}" required><br><br>
+                    <input name="phone_number" type="number" id="phone_number" value="{{$customer->sodienthoai}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
                 
                     <label for="inhabitant">Hộ khẩu</label>
-                    <input name="inhabitant" type="text" class="custom_address" id="inhabitant" value="{{$customer->hokhau}}" required><br><br>
+                    <input name="inhabitant" type="text" class="custom_address" id="inhabitant" value="{{$customer->hokhau}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
                 
                     <label>Địa chỉ</label>
-                    <input name="address" type="text" class="custom_address" value="{{$customer->diachi}}" required><br><br>
+                    <input name="address" type="text" class="custom_address" value="{{$customer->diachi}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
                 
                     <label for="note">Ghi chú</label><br>
                     <textarea name="note" type="text" name="note" rows="4" cols="50">{{$customer->ghichu}}</textarea><br><br>

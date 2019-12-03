@@ -50,7 +50,7 @@
                         <thead>
                             <tr>
                                 <th>Tên dự án</th>
-                                <th>Tòa chung cư</th>
+                                <th>Tên tòa chung cư</th>
                                 <th>Tầng thương mại</th>
                                 <th>Tầng dân cư</th>
                                 <th>Đơn vị quản lý</th>
