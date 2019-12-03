@@ -1,5 +1,7 @@
 <?php
 namespace App\Http\Controllers\admin;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\admin\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\Customer;
@@ -35,9 +37,13 @@ use Illuminate\Http\Request;
          */
         public function create()
         {
-            //chỉ lấy các căn hộ còn trống
-            $flats = DB::table('canho')->where('tinhtrang','0')->get();
-            return view("admin.customer.create",['flats'=>$flats]);
+            if (Gate::allows('admin', Auth::user())){
+                //chỉ lấy các căn hộ còn trống
+                $flats = DB::table('canho')->where('tinhtrang','0')->get();
+                return view("admin.customer.create",['flats'=>$flats]);
+            }else{
+                return view("../404");
+            }
         }
 
         /**
@@ -131,12 +137,16 @@ use Illuminate\Http\Request;
          * @return \Illuminate\Http\Response
          */
         public function edit($id){
-            $customer= Customer::find($id);
-            $customer_id = $customer->idkhachhang;
-            $flat_id = DB::table('khachhang')->where('idkhachhang', $customer_id)->value('idcanho');
-            $flat = Flat::find($flat_id);
-            
-            return view("admin.customer.edit", compact('customer','flat'));
+            if (Gate::allows('admin', Auth::user())){
+                $customer= Customer::find($id);
+                $customer_id = $customer->idkhachhang;
+                $flat_id = DB::table('khachhang')->where('idkhachhang', $customer_id)->value('idcanho');
+                $flat = Flat::find($flat_id);
+                
+                return view("admin.customer.edit", compact('customer','flat'));
+            }else{
+                return view("../404");
+            }
         }
 
         /**

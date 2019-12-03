@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\admin;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\admin\Controller;
 use App\Models\Contract;
@@ -35,9 +37,13 @@ class ContractController extends Controller
      */
     public function create()
     {
-        $projects = DB::table('duan')->distinct()->get();
-        $customers = DB::table('khachhang')->distinct()->orderByRaw('created_at DESC')->get();
-        return view('admin.contract.create',compact('projects','customers'));
+        if (Gate::allows('admin', Auth::user())){
+            $projects = DB::table('duan')->distinct()->get();
+            $customers = DB::table('khachhang')->distinct()->orderByRaw('created_at DESC')->get();
+            return view('admin.contract.create',compact('projects','customers'));
+        }else{
+            return view("../404");
+        }
     }
 
     /**
@@ -198,6 +204,7 @@ class ContractController extends Controller
      */
     public function edit($id)
     {
+        if (Gate::allows('admin', Auth::user())){
         $projects = DB::table('duan')->distinct()->get();
         // $customers_list = DB::table('khachhang')->distinct()->get();
 
@@ -211,6 +218,9 @@ class ContractController extends Controller
         $flat = DB::table('canho')->where('idcanho',"=",$idcanho)->first();
 
         return view('admin.contract.edit',compact("contract","customer","flat","projects"));
+        }else{
+            return view("../404");
+        }
     }
 
     /**

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\admin;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\admin\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -32,8 +34,13 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        $projects = DB::table('duan')->distinct()->get();
-        return view("admin.apartment.create",['projects'=>$projects]);
+        if (Gate::allows('admin', Auth::user())){
+            $projects = DB::table('duan')->distinct()->get();
+            return view("admin.apartment.create",['projects'=>$projects]);
+        }else{
+            return view("../404");
+        }
+        
     }
 
     /**
@@ -81,6 +88,19 @@ class ApartmentController extends Controller
             'manage_team.regex' => 'Đơn vị quản lý chứa ký tự không hợp lệ',
             'manage_team.max' => 'Tên đơn vị quản lý vượt quá số ký tự cho phép',
         ]);
+        $trade_begin = $request->get('begin_trade_floor');
+        $trade_end = $request->get('end_trade_floor');
+        $ppl_begin = $request->get('begin_people_floor');
+        $ppl_end = $request->get('end_people_floor');
+        if($trade_begin > $trade_end || $trade_begin > $ppl_begin || $trade_begin > $ppl_end){
+            return redirect('/admin/apartment/create')->withErrors('Các tầng nên được chia theo thứ tự tăng dần từ 1')->withInput();
+        }
+        else if($trade_end > $ppl_begin || $trade_end > $ppl_end){
+            return redirect('/admin/apartment/create')->withErrors('Các tầng nên được chia theo thứ tự tăng dần từ 1')->withInput();
+        }
+        else if($ppl_begin > $ppl_end){
+            return redirect('/admin/apartment/create')->withErrors('Các tầng nên được chia theo thứ tự tăng dần từ 1')->withInput();
+        }else{
             $apartment = Apartment::create();
             $apartment->idduan = $request->get('project_name');
             $apartment->tentoa = $request->get('apartment_name');
@@ -93,6 +113,7 @@ class ApartmentController extends Controller
             $apartment->save();
             session()->flash('create_notif','Thêm tòa chung cư thành công!');
             return redirect('/admin/apartment');
+        }
     }
 
     /**
@@ -114,9 +135,13 @@ class ApartmentController extends Controller
      */
     public function edit($id)
     {
-        $apartment = Apartment::find($id);
-        $projects =DB::table('duan')->get();
-        return view("admin.apartment.edit", compact('apartment','projects'));
+        if (Gate::allows('admin', Auth::user())){
+            $apartment = Apartment::find($id);
+            $projects =DB::table('duan')->get();
+            return view("admin.apartment.edit", compact('apartment','projects'));
+        }else{
+            return view("../404");
+        }
     }
 
     /**
@@ -161,6 +186,19 @@ class ApartmentController extends Controller
             'manage_team.regex' => 'Đơn vị quản lý chứa ký tự không hợp lệ',
             'manage_team.max' => 'Tên đơn vị quản lý vượt quá số ký tự cho phép',
         ]);
+        $trade_begin = $request->get('begin_trade_floor');
+        $trade_end = $request->get('end_trade_floor');
+        $ppl_begin = $request->get('begin_people_floor');
+        $ppl_end = $request->get('end_people_floor');
+        if($trade_begin > $trade_end || $trade_begin > $ppl_begin || $trade_begin > $ppl_end){
+            return redirect('/admin/apartment/'.$id.'/edit')->withErrors('Các tầng nên được chia theo thứ tự tăng dần từ 1')->withInput();
+        }
+        else if($trade_end > $ppl_begin || $trade_end > $ppl_end){
+            return redirect('/admin/apartment/'.$id.'/edit')->withErrors('Các tầng nên được chia theo thứ tự tăng dần từ 1')->withInput();
+        }
+        else if($ppl_begin > $ppl_end){
+            return redirect('/admin/apartment/'.$id.'/edit')->withErrors('Các tầng nên được chia theo thứ tự tăng dần từ 1')->withInput();
+        }else{
             $apartment = Apartment::find($id);
             
             $apartment->idduan= $request->get('project_name');
@@ -174,6 +212,7 @@ class ApartmentController extends Controller
             $apartment->save();
             session()->flash('update_notif','Cập nhật tòa chung cư thành công!');
             return redirect('/admin/apartment');
+        }
     }
 
     /**

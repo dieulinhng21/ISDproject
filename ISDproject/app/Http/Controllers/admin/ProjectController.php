@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\admin;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\admin\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -27,7 +29,11 @@ class ProjectController extends Controller
      */
     public function create()
     {
+        if (Gate::allows('admin', Auth::user())){
         return view("admin.project.create");
+        }else{
+            return view("../404");
+        }
     }
 
     /**
@@ -99,9 +105,13 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
+        if (Gate::allows('admin', Auth::user())){
         //$project_list = DB::table('duan')->get();,'project_list'
         $project = project::find($id);
         return view("admin.project.edit", compact('project'));
+        }else{
+            return view("../404");
+        }
     }
 
     /**

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\admin;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\admin\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\Flat;
@@ -35,10 +37,14 @@ class FlatController extends Controller
      */
     public function create()
     {
+        if (Gate::allows('admin', Auth::user())){
         $projects = DB::table('duan')->distinct()->get();
         $apartments = DB::table('toachungcu')->distinct()->get();
         
         return view("admin.flat.create",compact('projects','apartments'));
+        }else{
+            return("../404");
+        }
     }
 
     /**
@@ -133,11 +139,15 @@ class FlatController extends Controller
      */
     public function edit($id)
     {
+        if (Gate::allows('admin', Auth::user())){
         $flat = Flat::find($id);
         $projects = DB::table('duan')->distinct()->get();
         $apartments = DB::table('toachungcu')->distinct()->get();
 
         return view("admin.flat.edit",compact('flat','projects','apartments'));
+        }else{
+            return view("../404");
+        }
     }
 
     /**

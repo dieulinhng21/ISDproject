@@ -31,5 +31,42 @@ class AuthServiceProvider extends ServiceProvider
             }
                 return false;
         });
+        // Gate::define('create_apartment',function($user){
+        //     return $user->role == 1;
+        // });
+        // Gate::define('edit_apartment',function($user){
+        //     return $user->role == 1;
+        // });
+        // Gate::define('create_contract',function($user){
+        //     return $user->role == 1;
+        // });
+        // Gate::define('edit_contract',function($user){
+        //     return $user->role == 1;
+        // });
+        // Gate::define('create_customer',function($user){
+        //     return $user->role == 1;
+        // });
+        // Gate::define('edit_customer',function($user){
+        //     return $user->role == 1;
+        // });
+        // Gate::define('create_flat',function($user){
+        //     return $user->role == 1;
+        // });
+        // Gate::define('edit_flat',function($user){
+        //     return $user->role == 1;
+        // });
+        // Gate::define('create_manager',function($user){
+        //     return $user->role == 1;
+        // });
+        // Gate::define('edit_manager',function($user){
+        //     return $user->role == 1;
+        // });
+        // Gate::define('create_project',function($user){
+        //     return $user->role == 1;
+        // });
+        // Gate::define('edit_project',function($user){
+        //     return $user->role == 1;
+        // });
+
     }
 }

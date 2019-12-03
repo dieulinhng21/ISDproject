@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\admin;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\admin\Controller;
 use App\Models\Manager;
 use App\Http\Requests;
@@ -16,8 +18,12 @@ class ManagerController extends Controller
      */
     public function index()
     {
-        $manager = manager::paginate(5);
-        return view("admin.manager.index", array('model' => $manager));
+        if (Gate::allows('admin', Auth::user())){
+            $manager = manager::paginate(5);
+            return view("admin.manager.index", array('model' => $manager));
+        }else{
+            return view("../404");
+        }
     }
 
     /**
@@ -27,7 +33,11 @@ class ManagerController extends Controller
      */
     public function create()
     {
+        if (Gate::allows('admin', Auth::user())){
         return view("admin.manager.create");
+        }else{
+            return view("../404");
+        }
     }
 
     /**
@@ -101,8 +111,12 @@ class ManagerController extends Controller
      */
     public function edit($id)
     {
+        if (Gate::allows('admin', Auth::user())){
         $manager = manager::find($id);
         return view("admin.manager.edit", compact('manager'));
+        }else{
+            return view("../404");
+        }
     }
 
     /**
