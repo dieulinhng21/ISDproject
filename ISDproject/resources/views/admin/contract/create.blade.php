@@ -62,11 +62,11 @@ input{
 	</div>
 	<div style="width: 500px; text-align:center;margin-left:60%;">
 		<i>Hà Nội, ngày
-		<input type="date" name="contract_date" value="{{ old('contract_date') }}" autofocus required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"></i>
+		<input type="date" name="contract_date" value="{{ old('contract_date') }}" autofocus required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')"></i>
 	</div>
 	<h3 style="text-align:center">HỢP ĐỒNG MUA BÁN NHÀ Ở XÃ HỘI<br><br>
 	Số 
-	<input type="text" name="contract_code" style="width:80px; text-align:center" value="{{ old('contract_code') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
+	<input type="text" name="contract_code" style="width:80px; text-align:center" value="{{ old('contract_code') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')">
 	/2019/HĐMBCHXH/BKTL - TL 
 	</h3>
 	
@@ -76,7 +76,7 @@ input{
 <!-- Nội dung hợp đồng -->
 <div class="contract_content">
 	<strong>CĂN HỘ: </strong>
-	<input type="text" name="tencanho" value="{{ old('tencanho') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
+	<input type="text" name="tencanho" value="{{ old('tencanho') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')"><br><br>
 	<strong>CĂN HỘ TRỰC THUỘC DỰ ÁN:</strong>
 	<select name="project_name" id="project_name">Dự án: 
 	@if(isset($projects))
@@ -86,7 +86,7 @@ input{
 	@endif
     </select><br><br>
 	<strong>SÀN GIAO DỊCH:</strong>
-	<input type="text" name="san" value="{{ old('san') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
+	<input type="text" name="san" value="{{ old('san') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')">
 	
 	<h3>BÊN BÁN NHÀ Ở(sau đây gọi tắt là Bên bán):</h3>
 	<div class="content">
@@ -102,40 +102,41 @@ input{
 	<h3>BÊN MUA NHÀ Ở (sau đây gọi tắt là Bên mua):</h3>
 	<div class="content">
 	- Ông (bà):
-	<input type="text" name="name" value="{{ old('name') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><i>(Họ tên điền không dấu)</i><br><br>
+	<input type="text" name="name" value="{{ old('name') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')"><i>(Họ tên điền không dấu)</i><br><br>
 	- Số CMND:
-	<input type="number" name="identity_card" value="{{ old('identity_card') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
+	<input type="number" name="identity_card" value="{{ old('identity_card') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')">
 	  Ngày cấp: 
-	  <input type="date" name="identity_date" value="{{ old('identity_date') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
+	  <input type="date" name="identity_date" value="{{ old('identity_date') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')">
 		  <!-- /<input type="number" name="identity_month" style="width:45px; text-align:center">
 		  /<input type="number" name="identity_year" style="width:45px; text-align:center">   -->
 	  &nbsp;&nbsp;&nbsp;&nbsp;
 	  Tại: 
-	  <input type="text" name="noicap" value="{{ old('noicap') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
+	  <input type="text" name="noicap" value="{{ old('noicap') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')"><br><br>
 	- Hộ khẩu thường trú:
-	<input type="text" name="inhabitant" style="width: 350px" value="{{ old('inhabitant') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
+	<input type="text" name="inhabitant" style="width: 350px" value="{{ old('inhabitant') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')"><br><br>
 	- Địa chỉ liên hệ:
-	<input type="text" name="address"style="width: 350px" value="{{ old('address') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
+	<input type="text" name="address"style="width: 350px" value="{{ old('address') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')"><br><br>
 	- Điện thoại:	
-	<input type="number" name="phone_number" value="{{ old('phone_number') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
+	<input type="number" name="phone_number" value="{{ old('phone_number') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')"><br><br>
 
 	</div>
 		<h3>GIÁ BÁN VÀ PHƯƠNG THỨC THANH TOÁN</h3>
 		<p>
 		Giá bán nhà ở đối với căn hộ nhà ở chung cư được tính theo công thức lấy đơn giá 01 mét vuông sử dụng nhà ở (x) với tổng diện tích sử dụng nhà ở mua bán,<br><br>
 		 cụ thể là:
-		 <input type="number" name="square" value="{{ old('square') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">mét vuông sử dụng 
+		 <input type="number" name="square" value="{{ old('square') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')">mét vuông sử dụng 
 
 		 (x)
-		 <input type="number" name="price_per_square" value="{{ old('price_per_square') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">đồng/1 mét vuông sử dụng <br><br> 
+		 <input type="number" name="price_per_square" value="{{ old('price_per_square') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')">
+		 đồng/1 mét vuông sử dụng <br><br> 
 
 		 = 
-		 <input type="number" name="price" value="{{ old('price') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">đồng. 
+		 <input type="number" name="price" value="{{ old('price') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')">đồng. 
 		 <!-- (Bằng chữ:<input type="text" name="price_to_string" style="width: 350px" value="{{ old('price_to_string') }}">).<br><br> --><br><br>
 		 Giá bán này đã bao gồm thuế giá trị gia tăng VAT (nếu bên bán thuộc diện phải nộp thuế VAT).<br><br>
 		 Phương thức thanh toán: Các khoản thanh toán theo Hợp Đồng này chỉ được thực hiện qua tài khoản của Bên Bán mở tại Ngân hàng TMCP Đầu tư và Phát triển Việt Nam – Chi nhánh Tây Hà Nội (BIDV Tây Hà Nội)<br><br>
 		 a. Thanh toán một lần vào 
-		 ngày: <input type="date" name="pay_date" style="width:200px;" value="{{ old('pay_date') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
+		 ngày: <input type="date" name="pay_date" style="width:200px;" value="{{ old('pay_date') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')">
 		 (hoặc trong thời hạn <input type="number"  name="extra_date" style="width:50px;" value="{{ old('extra_date') }}">ngày, kể từ sau ngày kí kết hợp đồng này).<br><br>
 		 b. Trường hợp mua nhà ở theo phương thức trả dần thì thực hiện thanh toán vào các đợt: số lần thanh toán là
 		 	<select name="contract_kind" required>

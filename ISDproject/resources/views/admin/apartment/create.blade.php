@@ -65,27 +65,27 @@ button {
 
             <label>Tên tòa chung cư</label>
             <input class="custom" type="text" name="apartment_name" value="{{ old('apartment_name') }}" 
-            required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
+            required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')"><br><br>
 
             <label>Tầng thương mại</label>
             Từ tầng 
             <input class="detail" type="number" name="begin_trade_floor" 
-            value="{{ old('begin_trade_floor') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"> 
+            value="{{ old('begin_trade_floor') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')"> 
             đến 
             <input class="detail" type="number" name="end_trade_floor"
-            value="{{ old('end_trade_floor') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
+            value="{{ old('end_trade_floor') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')">
 
             <label>Tầng dân cư</label>
             Từ tầng 
             <input class="detail" type="number" name="begin_people_floor"
-            value="{{ old('begin_people_floor') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
+            value="{{ old('begin_people_floor') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')">
             đến 
             <input class="detail" type="number" name="end_people_floor"
-            value="{{ old('end_people_floor') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
+            value="{{ old('end_people_floor') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')"><br><br>
 
             <label for="status">Đơn vị quản lý</label>
             <input  type="text" name="manage_team" value="{{ old('manage_team') }}" 
-            required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
+            required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')">
             <i>(Tên đơn vị quản lý viết không dấu)</i><br><br>
 
             <button type="submit" class="btn btn-primary">Lưu</button>

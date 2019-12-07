@@ -70,16 +70,18 @@ button {
             </select><br><br>
 
             <label>Giá trị</label>
-            <input type="number" name="price" value="{{ old('price') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
+            <input type="number" name="price" value="{{ old('price') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')"><br><br>
 
             
             
             <label>Diện tích</label>
-            <input class="detail" type="number" name="square" value="{{ old('square') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"> 
+            <input class="detail" type="number" name="square" value="{{ old('square') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')"> 
             mét vuông <br><br>
             <label>Chi tiết</label>
-                <input class="detail" type="number" name="bedroom" value="{{ old('bedroom') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"> phòng ngủ - 
-                <input class="detail" type="number" name="bathroom" value="{{ old('bathroom') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"> phòng vệ sinh
+                <input class="detail" type="number" name="bedroom" value="{{ old('bedroom') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')"> 
+                phòng ngủ - 
+                <input class="detail" type="number" name="bathroom" value="{{ old('bathroom') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')"> 
+                phòng vệ sinh
                 - 1 phòng khách - 1 phòng bếp - 
             <br><br>
 

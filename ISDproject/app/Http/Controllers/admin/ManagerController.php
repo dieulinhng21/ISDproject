@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\admin\Controller;
 use App\Models\Manager;
 use App\Http\Requests;
@@ -132,7 +133,7 @@ class ManagerController extends Controller
             'name' => 'required|regex:/^([a-zA-Z\s\-]*)$/|max:50',
             'dob' => 'required|before_or_equal:today',
             'phone_number' => 'required|numeric|digits_between:9,10',//sđt dài từ 9-10 số
-            'email' => 'required|email',
+            'email' => 'required|email|unique:nguoiquanly,email,' . $id.',idnguoiquanly',
             'address' => 'required'
         ],
         [
@@ -148,8 +149,8 @@ class ManagerController extends Controller
             'phone_number.digits_between' => 'Độ dài số điện thoại không hợp lệ',
             //
             'email.required' => 'Email còn trống',
-            // 'email.unique' => 'Email đã tồn tại',
             'email' => 'Email không hợp lệ',
+            'unique' => 'Email đã tồn tại',
             //
             'address.required' => 'Địa chỉ còn trống',
         ]);
