@@ -52,7 +52,7 @@ button {
             @endif
 
             <label>Tên căn hộ</label>               
-            <input name="flat" type="text" value="{{$flat->tencanho}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
+            <input name="flat" type="text" value="{{$flat->tencanho}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')">
 
             <label for="project">Tên dự án</label>
             <!-- $available_project_list from edit function in FlatController -->

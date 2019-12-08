@@ -50,21 +50,21 @@ button {
             </div>
             @endif
                 <label>Tên dự án</label>
-                <input name="project_name" value="{{$project->tenduan}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
+                <input name="project_name" value="{{$project->tenduan}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')">
                 <i>(Tên dự án viết không dấu)</i><br><br>
             
                 <label>Công ty trực thuộc</label>
-                <input name="company" type="text" value="{{$project->congtytructhuoc}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
+                <input name="company" type="text" value="{{$project->congtytructhuoc}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')">
                 <i>(Tên công ty viết không dấu)</i><br><br>
             
                 <label>Vị trí</label>
-                <input name="location" type="text" style="width:250px" value="{{$project->vitri}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
+                <input name="location" type="text" style="width:250px" value="{{$project->vitri}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')"><br><br>
         
                 <label>Số tòa nhà</label>
-                <input name="apartment_number" type="number" value="{{$project->sotoanha}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')">
+                <input name="apartment_number" type="number" value="{{$project->sotoanha}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')">
             
                 <label>Trị giá</label>
-                <input name="price" type="number" value="{{$project->trigia}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')"><br><br>
+                <input name="price" type="number" value="{{$project->trigia}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')"><br><br>
             
                 <!-- <label>Tình trạng</label>
                 @if($project->tinhtrang == 1)

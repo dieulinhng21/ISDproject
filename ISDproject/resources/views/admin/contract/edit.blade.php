@@ -114,7 +114,7 @@ input{
 		 Giá bán này đã bao gồm thuế giá trị gia tăng VAT (nếu bên bán thuộc diện phải nộp thuế VAT).<br><br>
 		 Phương thức thanh toán: Các khoản thanh toán theo Hợp Đồng này chỉ được thực hiện qua tài khoản của Bên Bán mở tại Ngân hàng TMCP Đầu tư và Phát triển Việt Nam – Chi nhánh Tây Hà Nội (BIDV Tây Hà Nội)<br><br>
 		 a. Thanh toán một lần vào ngày
-		 <input type="date" name="pay_date" style="width:200px;" value="{{$contract->ngaythanhtoan}}" >
+		 <input type="date" name="pay_date" style="width:200px;" value="{{$contract->ngaythanhtoan}}" oninput="setCustomValidity('')">
 		 <!-- @if(is_null($contract->ngaythanhtoan))
 		 	<input type="date" name="pay_date" style="width:200px;" > 
 		 @else
