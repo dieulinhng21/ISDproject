@@ -76,7 +76,13 @@ input{
 <!-- Nội dung hợp đồng -->
 <div class="contract_content">
 	<strong>CĂN HỘ: </strong>
-	<input type="text" name="tencanho" value="{{ old('tencanho') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')"><br><br>
+	<!-- <input type="text" name="tencanho" value="{{ old('tencanho') }}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')"><br><br> -->
+	<select name="tencanho">
+	<!-- hiện ra các căn hộ còn trống -->
+	@foreach($flats as $flat)
+		<option value="{{$flat->idcanho}}">{{$flat->tencanho}}</option>
+	@endforeach
+	</select><br><br>
 	<strong>CĂN HỘ TRỰC THUỘC DỰ ÁN:</strong>
 	<select name="project_name" id="project_name">Dự án: 
 	@if(isset($projects))

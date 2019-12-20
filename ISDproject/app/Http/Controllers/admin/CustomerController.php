@@ -167,19 +167,14 @@ use Illuminate\Http\Request;
                 'inhabitant' => 'required',
                 'address' => 'required',
                 'flat' => 'required|unique:canho,tencanho,' . $id.',idcanho',
-                // 'note' => 'required'
             ],
             [
                 'name.required' => 'Tên khách hàng còn trống',
                 'name.regex' => 'Tên khách hàng chứa ký tự không hợp lệ',
                 'name.max' => 'Tên khách hàng vượt quá số ký tự cho phép',
-                //
-                // 'dob.required' => 'Năm sinh còn trống',
-                // 'dob.before_or_equal' => 'Ngày tháng năm sinh không hợp lệ',
-                //
                 'identity_card.required' => 'Số chứng minh còn trống',
                 'identity_card.numeric' => 'Số chứng minh chứa ký tự không hợp lệ',
-                'identity_card.digits_between' => 'Độ dài số chứng minh thư không hợp lệ',// chứng minh thư p dài từ 9-10 ký tự
+                'identity_card.digits_between' => 'Độ dài số chứng minh thư không hợp lệ',
                 //
                 'email.required' => 'Email còn trống',
                 'email.email' => 'Địa chỉ email không hợp lệ',
@@ -196,14 +191,12 @@ use Illuminate\Http\Request;
                 //
                 'flat.required' => 'Tên căn hộ còn trống',
                 'flat.unique' => 'Căn hộ đã có người mua',
-                // 'note.required' => 'Ghi chú không được trống'
             ]);
                 $flat_name = $request->get('flat');
                 $flat_id = DB::table('canho')->where('tencanho', $flat_name)->value('idcanho');
                 $customer = Customer::find($id);
                 
                 $customer->hoten= $request->get('name');
-                // $customer->ngaysinh= $request->get('dob');
                 $customer->chungminhthu = $request->get('identity_card');
                 $customer->email = $request->get('email');
                 $customer->sodienthoai = $request->get('phone_number');
@@ -213,15 +206,13 @@ use Illuminate\Http\Request;
                 $customer->save();
 
                 
-                $flat = Flat::find($flat_id);
-                $flat->tinhtrang = 1;
-                $flat->save();
+                // $flat = Flat::find($flat_id);
+                // $flat->tinhtrang = 1;
+                // $flat->save();
 
                 session()->flash('update_notif','Cập nhật khách hàng thành công!');
                 return redirect('/admin/customer');
-                // }else{
-                //     return redirect('/admin/customer/create')->withErrors("Căn hộ đã có người mua")->withInput();
-                // }
+                
         }
 
         /**

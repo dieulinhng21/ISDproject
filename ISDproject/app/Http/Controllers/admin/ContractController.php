@@ -40,7 +40,8 @@ class ContractController extends Controller
         if (Gate::allows('admin', Auth::user())){
             $projects = DB::table('duan')->distinct()->get();
             $customers = DB::table('khachhang')->distinct()->orderByRaw('created_at DESC')->get();
-            return view('admin.contract.create',compact('projects','customers'));
+            $flats = DB::table('canho')->where('tinhtrang','0')->get();
+            return view('admin.contract.create',compact('projects','customers','flats'));
         }else{
             return view("../404");
         }
