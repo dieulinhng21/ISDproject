@@ -133,7 +133,7 @@ class ManagerController extends Controller
             'name' => 'required|regex:/^([a-zA-Z\s\-]*)$/|max:50',
             'dob' => 'required|before_or_equal:today',
             'phone_number' => 'required|numeric|digits_between:9,10',//sđt dài từ 9-10 số
-            'email' => 'required|email|unique:nguoiquanly,email,' . $id.',idnguoiquanly',
+            'email' => 'required|email|unique:nguoiquanly,email,' . $id.',idquanly',
             'address' => 'required'
         ],
         [
