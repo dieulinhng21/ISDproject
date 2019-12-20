@@ -10,7 +10,7 @@ use App\Models\Project;
 use App\Models\Customer;
 use App\Models\Flat;
 use App\Http\Requests;
-use Illuminate\Validation\Rule;
+// use Illuminate\Validation\Rule;
 
 use Illuminate\Http\Request;
 
@@ -60,13 +60,6 @@ class ContractController extends Controller
             //|regex:/^[a-zA-Z]+$
             'project_name' => 'required',
             'tencanho' => 'required|exists:canho,tencanho',
-            // [
-            //     'required',
-            //     //tìm căn hộ trong bảng canho đồng thời validate tình trạng là còn trống hay đã đc bán
-            //     Rule::exists('canho')->where(function ($query) {
-            //         $query->where('tinhtrang', 0);
-            //     }),
-            // ],
             'san' => 'required',
             'contract_code' => 'required|regex:/^([a-zA-Z0-9\s\-]*)$/',
             'price' => 'required|numeric',
@@ -337,8 +330,12 @@ class ContractController extends Controller
     public function destroy($id)
     {
         $contract = Contract::find($id);
+        $id_canho = $contract->idcanho;
         $contract->delete();
 
+        $flat = Flat::find($id_canho);
+        $flat->tinhtrang = 0;
+        $flat->save();
         session()->flash('delete_notif','Xóa hợp đồng thành công!');
         return redirect('/admin/contract');
     }

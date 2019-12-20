@@ -47,12 +47,12 @@ input.custom{
             @endforeach
         </div>
         @endif
-        <label>Dự án</label>
+        <label>Tên dự án</label>
         <select name="project_name" required>
         @foreach($projects as $project)
             <option value="{{$project->idduan}}">{{ $project->tenduan}}</option>
         @endforeach
-        </select>
+        </select><br><br>
         
         <label>Tên tòa chung cư</label>
         <input name="apartment_name" type="text" value="{{$apartment->tentoa}}" required oninvalid="this.setCustomValidity('Chưa nhập thông tin')" oninput="setCustomValidity('')"><br><br>
