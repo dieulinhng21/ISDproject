@@ -69,7 +69,6 @@ class ProjectController extends Controller
             'apartment_number.required' => 'Số tòa nhà còn trống',
             'apartment_number.numeric' => 'Số tòa nhà phải có dạng số',
             'apartment_number.min' => 'Số tòa nhà phải lớn hơn 1',
-            // 'status.required' => 'Tình trạng còn trống'
             // 'date_format:Y-m-d' => 'Ngày tháng theo định dạng năm-tháng-ngày',
         ]);
             $project = project::create();  
@@ -124,7 +123,7 @@ class ProjectController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'project_name' => 'required|regex:/^([a-zA-Z\s\-]*)$/',
+            'project_name' => 'required|regex:/^([a-zA-Z\s\-]*)$/|unique:duan,tenduan,' . $id.',idduan',
             'company' => 'required|regex:/^([a-zA-Z\s\-]*)$/',
             'location' => 'required',
             'price' => 'required|numeric|min:1',
@@ -134,6 +133,7 @@ class ProjectController extends Controller
         [
             'project_name.required' => 'Tên dự án còn trống',
             'project_name.regex' => 'Tên dự án chứa ký tự không hợp lệ',
+            'project_name.unique' => 'Tên dự án đã tồn tại',
             //
             'company.required' => 'Công ty trực thuộc còn trống',
             'company.regex' => 'Công ty trực thuộc chứa ký tự không hợp lệ',
